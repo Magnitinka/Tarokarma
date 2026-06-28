@@ -1,4 +1,4 @@
-/* ===== БАЗОВЫЕ СТИЛИ (ЛАВАНДОВАЯ ТЕМА) ===== */
+/* ===== БАЗОВЫЕ СТИЛИ (ЛАВАНДОВАЯ ТЕМА С БЛАГОРОДНЫМ БОРДО) ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,20 +7,22 @@
 
 :root {
   /* ===== ФОНЫ ===== */
-  --bg-body: #dcc8e8;               /* насыщенный лавандовый */
+  --bg-body: #dcc8e8;
   --bg-body-gradient: radial-gradient(circle at 30% 20%, #e8d8f0 0%, #d0bcd8 100%);
   --bg-container: rgba(255, 255, 255, 0.88);
   --bg-card: #ffffff;
   --bg-card-hover: #faf5ff;
+  --bg-card-link: #e8d8f0;           /* лавандовый фон для карточек-ссылок на главной */
+  --bg-card-link-hover: #f0e4f8;     /* светлее при наведении */
   --bg-input: #faf5ff;
   --bg-cell: #f5edfa;
   --bg-missing: #e8d8f0;
   --bg-trait: #f5edfa;
   --bg-name-block: #f5edfa;
-  --bg-double-da: rgba(180, 80, 100, 0.06);
+  --bg-double-da: rgba(122, 42, 90, 0.06);
   --bg-warning: rgba(200, 170, 210, 0.15);
   --bg-zero: rgba(200, 170, 210, 0.2);
-  --bg-karmic-row: rgba(180, 80, 100, 0.08);
+  --bg-karmic-row: rgba(122, 42, 90, 0.08);
   --bg-unsolved: rgba(212, 175, 55, 0.06);
   --bg-modal: #ffffff;
   --bg-modal-desc: #f5edfa;
@@ -28,55 +30,55 @@
   --bg-result-desc: #f5edfa;
   --bg-legend: #f5edfa;
   --bg-stats: #f5edfa;
-  --bg-footer-course: rgba(180, 80, 100, 0.08);
-  --bg-paid-note: rgba(180, 80, 100, 0.04);
+  --bg-footer-course: rgba(122, 42, 90, 0.08);
+  --bg-paid-note: rgba(122, 42, 90, 0.04);
   --bg-back-link: #b8a0c8;
   --bg-back-link-hover: #9a80aa;
 
   /* ===== ТЕКСТ ===== */
-  --text-primary: #2a1a3a;
-  --text-secondary: #4a3a5a;
+  --text-primary: #1a0a2a;           /* очень тёмный фиолет для контраста */
+  --text-secondary: #3a2a4a;
   --text-muted: #7a6a8a;
   --text-light: #ffffff;
-  --text-subtitle: #4a3a5a;
+  --text-subtitle: #3a2a4a;
   --text-desc: #5a4a6a;
   --text-footer: #7a6a8a;
   --text-footer-course: #7a4a6a;
-  --text-link: #b8a0c8;
-  --text-link-hover: #8a6a9a;
+  --text-link: #b8a0c8;              /* яркий лавандовый для ссылок */
+  --text-link-hover: #d0c0e0;
   --text-warning: #4a3a5a;
   --text-warning-strong: #a05050;
   --text-zero: #7a4a5a;
-  --text-cell: #2a1a3a;
+  --text-cell: #1a0a2a;
   --text-cell-missing: #7a6a8a;
-  --text-trait-title: #2a1a3a;
-  --text-badge: #2a1a3a;
+  --text-trait-title: #1a0a2a;
+  --text-badge: #1a0a2a;
   --text-name-number: #b8a0c8;
-  --text-double-da: #2a1a3a;
-  --text-stats: #4a3a5a;
-  --text-legend: #4a3a5a;
-  --text-card-item: #2a1a3a;
+  --text-double-da: #1a0a2a;
+  --text-stats: #3a2a4a;
+  --text-legend: #3a2a4a;
+  --text-card-item: #1a0a2a;
   --text-card-item-number: #7a6a8a;
-  --text-card-item-name: #2a1a3a;
-  --text-modal-title: #2a1a3a;
+  --text-card-item-name: #1a0a2a;
+  --text-modal-title: #1a0a2a;
 
   /* ===== АКЦЕНТЫ ===== */
-  --accent: #b8a0c8;               /* серебристо-лавандовый */
+  --accent: #b8a0c8;                 /* серебристо-лавандовый */
   --accent-light: #d0c0e0;
   --accent-dark: #9a80aa;
-  --accent-secondary: #8a4a5a;     /* бордо */
+  --accent-secondary: #7a2a5a;       /* благородный бордовый с фиолетовым отливом */
 
   /* ===== ГРАНИЦЫ ===== */
-  --border-color: rgba(180, 80, 100, 0.12);
-  --border-light: rgba(180, 80, 100, 0.06);
-  --border-input: rgba(180, 80, 100, 0.12);
+  --border-color: rgba(122, 42, 90, 0.12);
+  --border-light: rgba(122, 42, 90, 0.06);
+  --border-input: rgba(122, 42, 90, 0.12);
   --border-input-focus: #b8a0c8;
-  --border-cell: rgba(180, 80, 100, 0.12);
-  --border-cell-missing: rgba(180, 80, 100, 0.08);
-  --border-badge: rgba(180, 80, 100, 0.08);
-  --border-name-block: rgba(180, 80, 100, 0.08);
-  --border-modal: rgba(180, 80, 100, 0.08);
-  --border-result-card: rgba(180, 80, 100, 0.08);
+  --border-cell: rgba(122, 42, 90, 0.12);
+  --border-cell-missing: rgba(122, 42, 90, 0.08);
+  --border-badge: rgba(122, 42, 90, 0.08);
+  --border-name-block: rgba(122, 42, 90, 0.08);
+  --border-modal: rgba(122, 42, 90, 0.08);
+  --border-result-card: rgba(122, 42, 90, 0.08);
 
   /* ===== КНОПКИ ===== */
   --btn-bg: linear-gradient(135deg, #b8a0c8, #9a80aa);
@@ -85,10 +87,10 @@
   --btn-shadow: 0 4px 15px rgba(180, 160, 200, 0.25);
   --btn-shadow-hover: 0 8px 25px rgba(180, 160, 200, 0.35);
 
-  --btn-primary-bg: linear-gradient(135deg, #8a4a5a, #6a3a4a);
-  --btn-primary-hover: linear-gradient(135deg, #a05a6a, #8a4a5a);
-  --btn-primary-shadow: 0 4px 15px rgba(138, 74, 90, 0.25);
-  --btn-primary-shadow-hover: 0 8px 25px rgba(138, 74, 90, 0.35);
+  --btn-primary-bg: linear-gradient(135deg, #7a2a5a, #5a1a3a);
+  --btn-primary-hover: linear-gradient(135deg, #9a3a7a, #7a2a5a);
+  --btn-primary-shadow: 0 4px 15px rgba(122, 42, 90, 0.25);
+  --btn-primary-shadow-hover: 0 8px 25px rgba(122, 42, 90, 0.35);
 
   --btn-pdf-bg: linear-gradient(135deg, #b8a0c8, #9a80aa);
   --btn-pdf-hover: linear-gradient(135deg, #c8b0d8, #b8a0c8);
@@ -142,7 +144,7 @@ h1 {
   letter-spacing: 2px;
 }
 h1 span {
-  color: var(--accent-dark);
+  color: var(--accent-secondary);    /* благородный бордовый в акценте заголовка */
 }
 h2 {
   font-size: 2rem;
@@ -165,7 +167,7 @@ h3 {
   margin-bottom: 25px;
 }
 
-/* ===== КАРТОЧКИ ===== */
+/* ===== КАРТОЧКИ (ОБЩИЕ) ===== */
 .card {
   background: var(--bg-card);
   backdrop-filter: blur(4px);
@@ -175,17 +177,32 @@ h3 {
   box-shadow: var(--shadow-card);
   margin: 20px 0;
 }
-a.card {
+
+/* ===== КАРТОЧКИ-ССЫЛКИ НА ГЛАВНОЙ СТРАНИЦЕ (калькуляторы) ===== */
+.grid .card {
+  background: var(--bg-card-link);
+  border-color: var(--accent);
   text-decoration: none;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   display: block;
   transition: 0.3s;
+  box-shadow: var(--shadow-card);
 }
-a.card:hover {
+.grid .card:hover {
+  background: var(--bg-card-link-hover);
   transform: translateY(-8px) scale(1.02);
-  background: var(--bg-card-hover);
-  border-color: var(--accent);
+  border-color: var(--accent-dark);
   box-shadow: var(--shadow-hover);
+}
+.grid .card h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  border-left: none;
+  padding-left: 0;
+  margin-top: 0.5em;
+}
+.grid .card p {
+  color: var(--text-secondary);
 }
 
 /* ===== ПОЛЯ ВВОДА ===== */
@@ -290,7 +307,7 @@ table {
   min-width: 600px;
 }
 th {
-  background: rgba(180, 80, 100, 0.06);
+  background: rgba(122, 42, 90, 0.06);
   color: var(--text-primary);
   font-weight: 600;
   padding: 12px 15px;
@@ -504,9 +521,9 @@ canvas {
   border-radius: 4px;
 }
 .legend-color.man { background: #b8a0c8; }
-.legend-color.woman { background: #8a4a5a; }
+.legend-color.woman { background: #7a2a5a; }
 .legend-color.ea { background: #b8a0c8; }
-.legend-color.er { background: #8a4a5a; }
+.legend-color.er { background: #7a2a5a; }
 
 .stats {
   display: flex;
