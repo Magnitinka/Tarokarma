@@ -34,6 +34,7 @@
       <input type="date" id="prognosisDate">
     </div>
     <button id="calculateBtn" class="btn btn-primary">🔮 РАССЧИТАТЬ</button>
+    <button id="pdfBtn" class="btn btn-pdf" style="margin-top:8px;">📄 РАСПЕЧАТАТЬ / PDF</button>
   </div>
 
   <div id="resultsArea"></div>
@@ -50,7 +51,7 @@
 </div>
 
 <script>
-// ===== ВЕСЬ ВАШ ИСХОДНЫЙ JS-КОД (БЕЗ ИЗМЕНЕНИЙ) =====
+// ===== ПОЛНЫЙ JS-КОД SOLO (ВЕСЬ, С РАСЧЁТАМИ) =====
 (function() {
     function toArcane(num) {
         if (num === 0) return 22;
@@ -803,6 +804,14 @@
     }
 
     document.getElementById('calculateBtn').addEventListener('click', render);
+    document.getElementById('pdfBtn').addEventListener('click', function() {
+        var res = document.getElementById('resultsArea');
+        if (res.innerHTML.trim() === '' || res.innerHTML.indexOf('⚠️') !== -1) {
+            alert('Сначала выполните расчёт (нажмите "РАССЧИТАТЬ")');
+            return;
+        }
+        window.print();
+    });
     window.addEventListener('DOMContentLoaded', render);
 })();
 </script>
