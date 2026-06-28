@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Индивидуальный расчёт</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back-link">← Назад в меню</a>
+  <h1>✨ Индивидуальный расчёт</h1>
+  <p class="sub">Квадрат Пифагора • Арканы • Прогностика • Энергия</p>
+
+  <div class="card">
+    <div class="input-group">
+      <label>📅 Дата рождения</label>
+      <input type="date" id="birthDate" value="1978-10-28">
+    </div>
+    <div class="input-group">
+      <label>📝 Имя</label>
+      <input type="text" id="firstName" placeholder="Имя" value="Виктория">
+    </div>
+    <div class="input-group">
+      <label>👤 Отчество</label>
+      <input type="text" id="middleName" placeholder="Отчество" value="Ивановна">
+    </div>
+    <div class="input-group">
+      <label>🏠 Фамилия</label>
+      <input type="text" id="lastName" placeholder="Фамилия" value="Иванова">
+    </div>
+    <div class="input-group">
+      <label>📅 Дата для прогностики (оставьте пустым для сегодня)</label>
+      <input type="date" id="prognosisDate">
+    </div>
+    <button id="calculateBtn" class="btn btn-primary">🔮 РАССЧИТАТЬ</button>
+  </div>
+
+  <div id="resultsArea"></div>
+
+  <div class="footer">
+    <div><span class="course">Курс «Кармическая Таронумерология»</span> • 2026</div>
+    <div class="paid-note">🔒 Базовые расчёты — бесплатно. Полная расшифровка и консультации — по запросу.</div>
+    <div style="margin-top:8px; font-size:0.85rem;">
+      Все права защищены. Материалы сайта предназначены для личного использования.
+      <br>Копирование и коммерческое использование без согласия автора запрещены.
+      <br><a href="#">О проекте</a> • <a href="#">Политика конфиденциальности</a> • <a href="#">Услуги и цены</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== ВЕСЬ ВАШ ИСХОДНЫЙ JS-КОД (БЕЗ ИЗМЕНЕНИЙ) =====
+// Я копирую его из вашего сообщения целиком.
+(function() {
+    // ======================== ОБЩИЕ ФУНКЦИИ ========================
+    function toArcane(num) {
+        if (num === 0) return 22;
+        let result = num;
+        while (result > 22) result -= 22;
+        while (result < 1) result += 22;
+        return result;
+    }
+
+    function toSingleDigit(num) {
+        let result = num;
+        while (result > 9) {
+            result = result.toString().split('').reduce((s, d) => s + parseInt(d, 10), 0);
+        }
+        return result;
+    }
+
+    function digitSum(num) {
+        return Math.abs(num).toString().split('').reduce((s, d) => s + parseInt(d, 10), 0);
+    }
+
+    function getBirthDigits(birthDate) {
+        if (!birthDate) return [];
+        const clean = birthDate.replace(/-/g, '');
+        return clean.split('').map(Number).filter(n => !isNaN(n));
+    }
+
+    // ======================== БУКВИЦА ========================
+    const letterMap = {
+        'А':1,'Б':2,'В':3,'Г':4,'Д':5,'Е':6,'Ё':7,'Ж':8,'З':9,
+        'И':1,'Й':2,'К':3,'Л':4,'М':5,'Н':6,'О':7,'П':8,'Р':9,
+        'С':1,'Т':2,'У':3,'Ф':4,'Х':5,'Ц':6,'Ч':7,'Ш':8,'Щ':9,
+        'Ъ':1,'Ы':2,'Ь':3,'Э':4,'Ю':5,'Я':6
+    };
+
+    function stringToDigits(str) {
+        const upper = str.toUpperCase();
+        let digits = [];
+        for (let ch of upper) {
+            if (letterMap[ch]) digits.push(letterMap[ch]);
+        }
+        return digits;
+    }
+
+    function countDigits(digits) {
+        const counts = Array(9).fill(0);
+        for (let d of digits) {
+            if (d >= 1 && d <= 9) counts[d-1]++;
+        }
+        return counts;
+    }
+
+    // ======================== АРКАНЫ И ИМЕНА ========================
+    const arcaneNames = {
+        1: "Маг", 2: "Верховная Жрица", 3: "Императрица", 4: "Император",
+        5: "Иерофант", 6: "Влюблённые", 7: "Колесница", 8: "Правосудие",
+        9: "Отшельник", 10: "Колесо Фортуны", 11: "Сила", 12: "Повешенный",
+        13: "Смерть", 14: "Умеренность", 15: "Дьявол", 16: "Башня",
+        17: "Звезда", 18: "Луна", 19: "Солнце", 20: "Страшный Суд",
+        21: "Мир", 22: "Шут"
+    };
+
+    // ======================== РАСЧЁТ ПО ДАТЕ РОЖДЕНИЯ ========================
+    function getDoubleDA(day) {
+        if (day >= 23 && day <= 31) {
+            const map = {
+                23: { main: 5, additional: 1 },
+                24: { main: 6, additional: 2 },
+                25: { main: 7, additional: 3 },
+                26: { main: 8, additional: 4 },
+                27: { main: 9, additional: 5 },
+                28: { main: 1, additional: 6 },
+                29: { main: 2, additional: 7 },
+                30: { main: 3, additional: 8 },
+                31: { main: 4, additional: 9 }
+            };
+            return map[day] || null;
+        }
+        return null;
+    }
+
+    function calculateNumerology(birthDate) {
+        if (!birthDate) return null;
+        const parts = birthDate.split('-').map(Number);
+        const year = parts[0], month = parts[1], day = parts[2];
+
+        const doubleDA = getDoubleDA(day);
+        let daMain, daAdditional;
+        if (doubleDA) {
+            daMain = doubleDA.main;
+            daAdditional = doubleDA.additional;
+        } else {
+            daMain = toArcane(day);
+            daAdditional = null;
+        }
+        const ma = toArcane(month);
+        const ga = toArcane(digitSum(year));
+        const ja = toArcane(digitSum(day) + digitSum(month) + digitSum(year));
+
+        const soulNumber = toSingleDigit(day);
+        const destinyNumber = toSingleDigit(digitSum(day) + digitSum(month) + digitSum(year));
+
+        function calcDerived(daVal) {
+            const sZ = toArcane(daVal + ma + ga);
+            const opv1 = toArcane(Math.abs(daVal - ma));
+            const tp = toArcane(daVal + ma);
+            const zp = toArcane(daVal + 4 * ma + ga);
+            const zz = toArcane(daVal + 2 * ma + ga);
+            const zd = toArcane(daVal + 10 * ma + ga);
+            const ku1 = toArcane(sZ + opv1);
+            const ku2 = toArcane(daVal + opv1);
+            const ku3 = toArcane(Math.abs(daVal - ga));
+            const ku4 = toArcane(ga + sZ);
+            const energySphere = toArcane(daVal + 2 * ma + ga);
+            return { da: daVal, sZ, opv1, tp, zp, zz, zd, ku1, ku2, ku3, ku4, energySphere };
+        }
+
+        let main = calcDerived(daMain);
+        let additional = null;
+        if (daAdditional !== null) {
+            additional = calcDerived(daAdditional);
+        }
+
+        // Энергия Архангела
+        let dayStr = day.toString().padStart(2, '0');
+        let monthStr = month.toString().padStart(2, '0');
+        let dm = parseInt(dayStr + monthStr, 10);
+        let eaProduct = dm * year;
+        let eaSum = digitSum(eaProduct);
+
+        let erProduct = day * month * year;
+        let erSum = digitSum(erProduct);
+
+        // Срединная линия
+        const midline = (eaSum / 7).toFixed(2);
+
+        let fullNumber = parseInt(dayStr + monthStr + year.toString(), 10);
+        let division = fullNumber / 7;
+        let divStr = division.toString();
+        let decimalPart = "";
+        if (divStr.includes('.')) decimalPart = divStr.split('.')[1];
+        else if (divStr.includes(',')) decimalPart = divStr.split(',')[1];
+        let programCode = decimalPart.charAt(0);
+        if (programCode === "" || isNaN(parseInt(programCode))) programCode = 0;
+        else programCode = parseInt(programCode, 10);
+
+        let birthDigits = getBirthDigits(birthDate);
+        let isolated = [];
+        let counts = countDigits(birthDigits);
+        [1,3,7,9].forEach(d => { if (counts[d-1] === 1) isolated.push(d); });
+
+        return {
+            day, month, year,
+            daMain, daAdditional,
+            ma, ga, ja,
+            soulNumber, destinyNumber,
+            doubleDA,
+            main, additional,
+            eaProduct, eaSum, erProduct, erSum, midline, programCode,
+            isolated
+        };
+    }
+
+    // ======================== КВАДРАТ ПИФАГОРА ========================
+    function getPythagorasSquare(birthDate, firstName) {
+        const birthDigits = getBirthDigits(birthDate);
+        const nameDigits = stringToDigits(firstName);
+        const birthCounts = countDigits(birthDigits);
+        const nameCounts = countDigits(nameDigits);
+        return birthCounts.map((v, i) => v + nameCounts[i]);
+    }
+
+    function getFamilyCounts(last, first, middle) {
+        const all = stringToDigits(last).concat(stringToDigits(first)).concat(stringToDigits(middle));
+        return countDigits(all);
+    }
+
+    // ======================== ПРОГНОСТИКА ========================
+    function getPersonalYear(birthDate, targetYear) {
+        if (!birthDate || !targetYear) return null;
+        const parts = birthDate.split('-').map(Number);
+        const day = parts[2], month = parts[1];
+        const sum = digitSum(day) + digitSum(month) + digitSum(targetYear);
+        const num = toSingleDigit(sum);
+        const da = toArcane(day);
+        const ma = toArcane(month);
+        const ga = toArcane(digitSum(targetYear));
+        const arcane = toArcane(da + ma + ga);
+        return { num, arcane };
+    }
+
+    function getPersonalMonth(birthDate, targetYear, targetMonth) {
+        if (!birthDate || !targetYear || !targetMonth) return null;
+        const parts = birthDate.split('-').map(Number);
+        const day = parts[2], month = parts[1];
+        const sum = digitSum(day) + digitSum(targetMonth) + digitSum(targetYear);
+        const num = toSingleDigit(sum);
+        const da = toArcane(day);
+        const ga = toArcane(digitSum(targetYear));
+        const targetMa = toArcane(targetMonth);
+        const arcane = toArcane(da + targetMa + ga);
+        return { num, arcane };
+    }
+
+    function getPersonalDay(birthDate, targetDate) {
+        if (!birthDate || !targetDate) return null;
+        const partsB = birthDate.split('-').map(Number);
+        const dayB = partsB[2], monthB = partsB[1], yearB = partsB[0];
+        const partsT = targetDate.split('-').map(Number);
+        const dayT = partsT[2], monthT = partsT[1], yearT = partsT[0];
+        const sum = digitSum(dayB) + digitSum(monthB) + digitSum(yearB) + digitSum(dayT) + digitSum(monthT) + digitSum(yearT);
+        const num = toSingleDigit(sum);
+        const daB = toArcane(dayB);
+        const maB = toArcane(monthB);
+        const gaB = toArcane(digitSum(yearB));
+        const daT = toArcane(dayT);
+        const maT = toArcane(monthT);
+        const gaT = toArcane(digitSum(yearT));
+        const arcane = toArcane(daB + maB + gaB + daT + maT + gaT);
+        return { num, arcane };
+    }
+
+    // ======================== РАСШИФРОВКИ ========================
+    const socialTasks = {
+        1: "Передавать знания устно, быть оратором, наставником.",
+        2: "Заботиться о природе, животных, женщинах, развивать интуицию.",
+        3: "Родить и воспитывать ребёнка, быть учителем.",
+        4: "Стать профессионалом, давать работу другим.",
+        5: "Заниматься наукой, духовными исследованиями.",
+        6: "Стать эталоном любви и гармонии, сохранять семью.",
+        7: "Быть активным, путешествовать, вдохновлять других.",
+        8: "Защищать закон и справедливость, не конфликтовать.",
+        9: "Изучать эзотерику, помогать старшим.",
+        10: "Учиться щедрости, циркулировать деньгами.",
+        11: "Управлять эмоциями, идти на компромисс.",
+        12: "Слушать и слышать, проявлять сострадание.",
+        13: "Создавать что-то новое, привносить то, чего не было.",
+        14: "Жить умеренно, радоваться малому.",
+        15: "Заниматься эзотерикой, влиять на людей.",
+        16: "Строить, разрушать стереотипы.",
+        17: "Развивать таланты, творить.",
+        18: "Создавать уют, кормить людей.",
+        19: "Достичь высокого статуса, вдохновлять.",
+        20: "Защищать традиции рода.",
+        21: "Представлять Родину за границей.",
+        22: "Быть опорой для детей, наставником."
+    };
+
+    const desc = {
+        SZ: socialTasks,
+        ZZ: socialTasks,  // теперь здесь социальные задачи
+
+        OPV: {
+            1: "Предал брата/сестру. Задача: поддерживать их.",
+            2: "Предал маму. Задача: помогать маме.",
+            3: "Предал ребёнка. Задача: лично воспитывать.",
+            4: "Жил за чужой счёт. Задача: добиться карьеры трудом.",
+            5: "Предал отца. Задача: уважать отца.",
+            6: "Разрушал семьи. Задача: прощать измены, не разводиться.",
+            7: "Мешал другим. Задача: бескорыстно помогать.",
+            8: "Нарушал закон. Задача: соблюдать законы.",
+            9: "Бросил родственника. Задача: помогать роду.",
+            10: "Мошенничал. Задача: соблюдать финансовые обязательства.",
+            11: "Вредил здоровью. Задача: опекать больных.",
+            12: "Цинично относился. Задача: проявлять милосердие.",
+            13: "Неумышленно убил. Задача: опекать недееспособного.",
+            14: "Разорил чужую семью. Задача: обеспечивать свою.",
+            15: "Использовал чёрную магию. Задача: помогать людям.",
+            16: "Лишил имущества. Задача: не иметь собственности.",
+            17: "Нарушил авторские права. Задача: помогать талантливым.",
+            18: "Корысть в семье. Задача: не обманывать близких.",
+            19: "Злоупотреблял властью. Задача: помогать в карьере.",
+            20: "Предал традиции рода. Задача: поддерживать род.",
+            21: "Предал Родину. Задача: прославлять страну.",
+            22: "Делал аборты. Задача: помогать детям."
+        },
+        TP: {
+            1: "Нежелание учиться, страх публичности.",
+            2: "Обиды на маму, нерешительность.",
+            3: "Страх материнства/отцовства, гиперопека.",
+            4: "Страх потери работы, желание жить за чужой счёт.",
+            5: "Обида на отца, страх перед начальством.",
+            6: "Нежелание связывать себя узами, страх одиночества.",
+            7: "Страх самостоятельности, неумение доводить дела.",
+            8: "Некорректное отношение к закону.",
+            9: "Страх одиночества, эгоизм.",
+            10: "Страх бедности, скупость.",
+            11: "Страх конкуренции, неуверенность.",
+            12: "Страх публичности, стыд, уныние.",
+            13: "Страх смерти, мнительность.",
+            14: "Жадность, страх потерь.",
+            15: "Страх магии, искушений, зависть.",
+            16: "Живёт прошлым, боится перемен.",
+            17: "Неуверенность в талантах, страх сцены.",
+            18: "Неумение прощать, ранимость.",
+            19: "Неуверенность в себе, страх потери статуса.",
+            20: "Нежелание следовать традициям.",
+            21: "Страх путешествий, неприятие других культур.",
+            22: "Множество страхов, инфантильность."
+        },
+        ZP: {
+            1: "Учёный, оратор, журналист, маркетолог.",
+            2: "Экология, ветеринария, медицина, целительство.",
+            3: "Производство, бизнес, мамы и дети.",
+            4: "Крупный бизнес, политика, строительство.",
+            5: "Путешествия, транспорт, логистика, изобретательства.",
+            6: "Дом, семья, дизайн, семейный бизнес.",
+            7: "Научная деятельность, технические профессии.",
+            8: "Юриспруденция, нотариат, бизнес-организация.",
+            9: "Эзотерика, IT, прогнозирование, бухгалтерия.",
+            10: "Финансы, банки, инвестиции.",
+            11: "Спорт, военные, полиция, хирургия.",
+            12: "Психология, учителя, консультанты.",
+            13: "Адвокаты, экстремальные профессии.",
+            14: "Сельское хозяйство, ремесло, диетология.",
+            15: "Эзотерика, актёрство, продюсирование.",
+            16: "Строительство, недвижимость, инженерия.",
+            17: "Творчество, искусство, выступления.",
+            18: "Гостиничный бизнес, рестораны, парикмахерские.",
+            19: "Крупный бизнес, госслужба, политика.",
+            20: "Политика, древние ремёсла, консультирование.",
+            21: "Международные отношения, переводы.",
+            22: "Воспитатели, учителя начальных классов."
+        },
+        ZD: {
+            1: "Деньги через речь, обучение, продажи.",
+            2: "Деньги через заботу, медицину, экологию.",
+            3: "Деньги через творчество, детей, производство.",
+            4: "Деньги через бизнес, политику, управление.",
+            5: "Деньги через путешествия, посредничество.",
+            6: "Деньги через дом, семью, дизайн.",
+            7: "Деньги через изобретения, науку.",
+            8: "Деньги через закон, суды, бизнес.",
+            9: "Деньги через эзотерику, IT, консультации.",
+            10: "Деньги через финансы, инвестиции.",
+            11: "Деньги через спорт, силовые структуры.",
+            12: "Деньги через психологию, учительство.",
+            13: "Деньги через экстрим, адвокатуру.",
+            14: "Деньги через ремесло, сельское хозяйство.",
+            15: "Деньги через эзотерику, манипуляции.",
+            16: "Деньги через строительство, недвижимость.",
+            17: "Деньги через творчество, искусство.",
+            18: "Деньги через комфорт, услуги, питание.",
+            19: "Деньги через власть, статус.",
+            20: "Деньги через традиции, ремёсла.",
+            21: "Деньги через международные связи.",
+            22: "Деньги через многозадачность, детей."
+        },
+        KU1: {
+            1: "Хлопоты с братьями/сёстрами, сплетни.",
+            2: "Зацикленность на здоровье, диетах.",
+            3: "Гиперопека детей.",
+            4: "Трудоголизм, нелюбовь к подчинению.",
+            5: "Религиозный фанатизм.",
+            6: "Зависимость от семьи.",
+            7: "Зависимость от путешествий.",
+            8: "Зацикленность на бизнесе, судах.",
+            9: "Одиночество, провоцирование конфликтов.",
+            10: "Боязнь бедности.",
+            11: "Жажда препятствий, создание проблем.",
+            12: "Жертвенность, любовь к жалости.",
+            13: "Зависимость от экстрима.",
+            14: "Стремление к стабильности.",
+            15: "Все виды зависимостей.",
+            16: "Боязнь остаться бездомным.",
+            17: "Страх заявить о таланте.",
+            18: "Гостеприимство, нелюбовь к отелям.",
+            19: "Зависимость от статуса.",
+            20: "Эмоциональная привязка к Роду.",
+            21: "Зависимость от красивой жизни.",
+            22: "Зависимость от друзей."
+        },
+        KU2: {
+            1: "Не передал важную информацию.",
+            2: "Не получил любви от мамы.",
+            3: "Не испытывал материнства.",
+            4: "Не мог профессионально расти.",
+            5: "Переживания из-за отца.",
+            6: "Неразделённая любовь.",
+            7: "Хотел путешествовать, но не мог.",
+            8: "Несправедливое наказание.",
+            9: "Сиротство.",
+            10: "Был разорён.",
+            11: "Пережил пытки, насилие.",
+            12: "Был в рабстве.",
+            13: "Был убит.",
+            14: "Был лишён наследства.",
+            15: "Связан с криминалом.",
+            16: "Был бездомным.",
+            17: "Был талантлив, но на вторых ролях.",
+            18: "Был съеден бытом.",
+            19: "Был лишён власти.",
+            20: "Изгнан из Рода.",
+            21: "Ушёл из жизни, не исполнив мечту.",
+            22: "Много времени потрачено впустую."
+        },
+        KU3: {
+            1: "Не слушает советы.",
+            2: "Отсутствие благодарности.",
+            3: "Зависть, агрессия на ребёнка.",
+            4: "Жёсткость, жестокость.",
+            5: "Неуважение к религиям, учителям.",
+            6: "Капризность, измены.",
+            7: "Унижение слабых.",
+            8: "Нарушение законов.",
+            9: "Эгоизм.",
+            10: "Корысть.",
+            11: "Агрессия, мстительность.",
+            12: "Цинизм, оскорбления.",
+            13: "Жестокость.",
+            14: "Лень, жадность.",
+            15: "Манипуляции, шантаж.",
+            16: "Не прощает.",
+            17: "Плагиат.",
+            18: "Манипуляции, мнительность.",
+            19: "Барские замашки.",
+            20: "Неуважение к Роду.",
+            21: "«Я самый».",
+            22: "Капризы, страх ответственности."
+        },
+        KU4: {
+            1: "Плюс: помощь братьям. Минус: предательство.",
+            2: "Плюс: здоровье. Минус: психика.",
+            3: "Плюс: брак, дети. Минус: сложности с зачатием.",
+            4: "Плюс: карьерный рост. Минус: безработица.",
+            5: "Плюс: помощь учителей. Минус: козёл отпущения.",
+            6: "Плюс: брак по любви. Минус: измены.",
+            7: "Плюс: путешествия. Минус: проблемы с ногами.",
+            8: "Плюс: победы в судах. Минус: осуждение.",
+            9: "Плюс: успех в одиночестве. Минус: хронические болезни.",
+            10: "Плюс: удача. Минус: долги.",
+            11: "Плюс: сильная личность. Минус: предательство.",
+            12: "Плюс: помощь незнакомых. Минус: тяжёлые болезни.",
+            13: "Плюс: резкие перемены. Минус: крах.",
+            14: "Плюс: стабильный бизнес. Минус: разорение.",
+            15: "Плюс: криминал. Минус: вампиризм.",
+            16: "Плюс: имущество. Минус: потеря имущества.",
+            17: "Плюс: творчество. Минус: плагиат.",
+            18: "Плюс: брак, уют. Минус: проблемы с зачатием.",
+            19: "Плюс: статус. Минус: потеря статуса.",
+            20: "Плюс: брак, дети. Минус: генетика.",
+            21: "Плюс: успех за границей. Минус: предательство.",
+            22: "Плюс: множество благ. Минус: подставы."
+        },
+        Energy: {
+            1: "Эзотерика, обучение, развитие.",
+            2: "Экология, природа, общение с мамой.",
+            3: "Семья, дети, материнство.",
+            4: "Работа, мужчины, профессионализм.",
+            5: "Наставничество, традиции.",
+            6: "Любовь, чистота отношений.",
+            7: "Активный образ жизни, путешествия.",
+            8: "Отстаивание справедливости.",
+            9: "Эзотерика, уединение.",
+            10: "Азарт, деньги, везение.",
+            11: "Сила, спорт, конкуренция.",
+            12: "Психология, слушать, принимать.",
+            13: "Адреналин, экстрим, создание нового.",
+            14: "Природа, созерцание, ремесло.",
+            15: "Магия, соблазнение, реклама.",
+            16: "Строительство, ремонт.",
+            17: "Творчество, сцена, искусство.",
+            18: "Забота, кормление, вода.",
+            19: "Социальный рост, лидерство.",
+            20: "Род, традиции.",
+            21: "Путешествия, языки.",
+            22: "Дети, молодёжь, искренность."
+        },
+        Prognosis: {
+            1: "Новые начинания, планирование, активность, обучение.",
+            2: "Терпение, отношения, дипломатия, ожидание.",
+            3: "Самовыражение, творчество, общение, развлечения.",
+            4: "Работа, практичность, дисциплина, здоровье.",
+            5: "Перемены, путешествия, свобода, риск.",
+            6: "Семья, любовь, ответственность, примирение.",
+            7: "Уединение, переосмысление, интуиция, отдых.",
+            8: "Власть, авторитет, финансы, карьера.",
+            9: "Завершение, благотворительность, отпускание."
+        },
+        Pythagoras: {
+            1: {
+                0: "Не любит общение, выдерживает 30 мин.",
+                1: "Говорит конструктивно, устаёт от людей.",
+                2: "Управляет речью, любит творчество.",
+                3: "Любит поговорить, боится одиночества.",
+                4: "Дар писательства, речь закольцована.",
+                5: "Эзотерический талант, пророчество."
+            },
+            2: {
+                0: "Крепкая психика, логик.",
+                1: "Хорошая психика, чувствует любимых.",
+                2: "Подвижная психика, ранимый.",
+                3: "Руки-пылесос, экстрасенсорика.",
+                4: "Высокие вибрации, тактильный контакт опасен."
+            },
+            3: {
+                0: "Память кашеобразная.",
+                1: "Структурная память, нужны схемы.",
+                2: "Хорошая память.",
+                3: "Домысливает, берёт всю информацию.",
+                4: "Подключён к инфополю Земли, инсайты."
+            },
+            4: {
+                0: "Не думает о порядке, трудно доводит до конца.",
+                1: "Практичность, доводит дела.",
+                2: "Живёт по инструкции.",
+                3: "Реализуется в любой области.",
+                4: "Профессионал, усовершенствует ремесло."
+            },
+            5: {
+                0: "Всё принимает близко к сердцу.",
+                1: "Осознаёт себя, тактичен.",
+                2: "Исцеляет словом, навязчивый.",
+                3: "Тянет одеяло на себя."
+            },
+            6: {
+                0: "Где я, там и дом, не стремится к браку.",
+                1: "Семья важна, готовит быстро.",
+                2: "Заботливый, любит готовить.",
+                3: "Болезненно относится к близким."
+            },
+            7: {
+                0: "Один ангел-хранитель, повтор сценариев раз в 9 лет.",
+                1: "Второй ангел-хранитель, прислушивается.",
+                2: "Три ангела-хранителя.",
+                3: "Вещие сны, может призвать ангела."
+            },
+            8: {
+                0: "Мыслит глобально, видит результат.",
+                1: "Ценит процесс, детали.",
+                2: "Придирчив к словам.",
+                3: "Читает приметы, анализ."
+            },
+            9: {
+                0: "Логика не работает, только интуиция.",
+                1: "Логическое мышление есть.",
+                2: "Дар сновидения, вещие сны.",
+                3: "Яснознание, ясновидение.",
+                4: "Знак пророка."
+            }
+        },
+        Isolated: {
+            1: "Хранитель фундаментального знания, метафизик. В прошлой жизни убит. Нельзя проводить регрессию.",
+            3: "Учёный, создатель технологий. В прошлой жизни убит. Регрессию можно с осторожностью.",
+            7: "Жрец, общается с высшими силами. В прошлой жизни убит. Регрессию нельзя.",
+            9: "Маг, колдун. В прошлой жизни убит. Регрессию нельзя."
+        },
+        ProgramCode: {
+            0: "Тяжкий грех, причина массовых убийств, обнулён. Начать с нуля.",
+            1: "Учёный, лектор, писатель. Передавать знания.",
+            2: "Целитель (Рейки, космоэнергетика, белая магия).",
+            4: "Ремесленник, создатель материальных объектов.",
+            5: "Создавал программное обеспечение. Работать с информацией.",
+            7: "Кармический код, придумывал искушения. Тяжёлая судьба.",
+            8: "Создавал информационную защиту, родовые связи."
+        }
+    };
+
+    function getDesc(obj, key) {
+        return (obj && obj[key]) ? obj[key] : "—";
+    }
+
+    // ======================== ОСНОВНОЙ РАСЧЁТ ========================
+    function render() {
+        try {
+            const birthDate = document.getElementById('birthDate').value;
+            const firstName = document.getElementById('firstName').value.trim();
+            const middleName = document.getElementById('middleName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const prognosisDate = document.getElementById('prognosisDate').value;
+
+            if (!birthDate || !firstName) {
+                document.getElementById('resultsArea').innerHTML = `<div class="card" style="color:#aa8866;">⚠️ Заполните дату рождения и имя.</div>`;
+                return;
+            }
+
+            const data = calculateNumerology(birthDate);
+            if (!data) {
+                document.getElementById('resultsArea').innerHTML = `<div class="card" style="color:#aa8866;">⚠️ Ошибка расчёта даты.</div>`;
+                return;
+            }
+
+            // ----- Квадрат Пифагора -----
+            const pythCounts = getPythagorasSquare(birthDate, firstName);
+            const rows = [[3,6,9],[2,5,8],[1,4,7]];
+            function renderCell(d) {
+                const cnt = pythCounts[d-1] || 0;
+                return `<div class="cell ${cnt===0 ? 'missing' : ''}">${d}<span>${cnt}</span></div>`;
+            }
+            let pythHtml = `<div class="pythagoras-square"><div class="square-grid">`;
+            rows.forEach(row => row.forEach(d => { pythHtml += renderCell(d); }));
+            pythHtml += `</div></div>`;
+
+            let pythInterpret = "";
+            for (let d=1; d<=9; d++) {
+                const cnt = pythCounts[d-1] || 0;
+                let key = cnt;
+                if (cnt >= 5 && d === 1) key = 5;
+                else if (cnt >= 4 && d !== 1) key = 4;
+                let descP = desc.Pythagoras[d] ? desc.Pythagoras[d][key] || desc.Pythagoras[d][2] || "" : "";
+                pythInterpret += `<div class="badge"><strong>${d}</strong> (${cnt}): ${descP}</div>`;
+            }
+
+            function has(c) { return pythCounts[c-1] > 0; }
+            let arrowsStrength = [], arrowsWeak = [];
+            if (has(1) && has(4) && has(7)) arrowsStrength.push("1-4-7 — практичность, бизнес и карьера");
+            else arrowsWeak.push("1-4-7 — подчинённость авторитетам");
+            if (has(2) && has(5) && has(8)) arrowsStrength.push("2-5-8 — семейственность, ответственность");
+            else arrowsWeak.push("2-5-8 — самодостаточен, но стремится к партнёрству");
+            if (has(3) && has(6) && has(9)) arrowsStrength.push("3-6-9 — интеллект, самопознание");
+            else arrowsWeak.push("3-6-9 — интуиция и телепатия");
+            if (has(1) && has(2) && has(3)) arrowsStrength.push("1-2-3 — стрела планирования");
+            if (has(4) && has(5) && has(6)) arrowsStrength.push("4-5-6 — стрела воли, силы, характера");
+            else if (!has(4) || !has(5) || !has(6)) arrowsWeak.push("4-5-6 — безволие, депрессия");
+            if (has(7) && has(8) && has(9)) arrowsStrength.push("7-8-9 — деятельность, активность");
+            else arrowsWeak.push("7-8-9 — лень");
+            if (has(1) && has(5) && has(9)) arrowsStrength.push("1-5-9 — стрела решительности и риска");
+            else arrowsWeak.push("1-5-9 — робость, неуверенность, фобии");
+            if (has(3) && has(5) && has(7)) arrowsStrength.push("3-5-7 — стрела скептиков");
+            else arrowsWeak.push("3-5-7 — доверчивость, жертвы мошенников");
+
+            let arrowsHtml = `<div class="trait-list"><div class="trait-title">⚡ Стрелы силы</div>${arrowsStrength.map(s=>`<div>✅ ${s}</div>`).join('') || '<i>Нет активных</i>'}</div>`;
+            arrowsHtml += `<div class="trait-list"><div class="trait-title">⚠️ Стрелы слабости</div>${arrowsWeak.map(s=>`<div>🔻 ${s}</div>`).join('') || '<i>Нет слабостей</i>'}</div>`;
+
+            // ----- Родовая карта -----
+            const familyCounts = getFamilyCounts(lastName, firstName, middleName);
+            let familyHtml = `<div class="pythagoras-square"><div class="square-grid">`;
+            rows.forEach(row => row.forEach(d => {
+                const cnt = familyCounts[d-1] || 0;
+                familyHtml += `<div class="cell ${cnt===0 ? 'missing' : ''}">${d}<span>${cnt}</span></div>`;
+            }));
+            familyHtml += `</div></div>`;
+            let familyInterpret = "";
+            for (let d=1; d<=9; d++) {
+                const cnt = familyCounts[d-1] || 0;
+                let descText = "";
+                if (cnt === 0) descText = "нет опыта, можно наработать";
+                else if (cnt === 1) descText = "единственный в роду";
+                else if (cnt === 2) descText = "родовые знания";
+                else if (cnt === 3) descText = "в роду обучались, но не передавали";
+                else if (cnt >= 4) descText = "профессионализм, передача знаний";
+                familyInterpret += `<div class="badge"><strong>${d}</strong> (${cnt}): ${descText}</div>`;
+            }
+
+            // ----- Число имени -----
+            const nameDigits = stringToDigits(firstName);
+            const nameSum = nameDigits.reduce((a,b)=>a+b,0);
+            const nameNumber = toSingleDigit(nameSum);
+            const nameArc = toArcane(nameSum);
+            const nameArcName = arcaneNames[nameArc] || "Аркан";
+
+            // ----- ПРОГНОСТИКА -----
+            let targetDate;
+            if (prognosisDate) {
+                targetDate = prognosisDate;
+            } else {
+                const now = new Date();
+                const y = now.getFullYear();
+                const m = String(now.getMonth() + 1).padStart(2, '0');
+                const d = String(now.getDate()).padStart(2, '0');
+                targetDate = y + '-' + m + '-' + d;
+            }
+            const partsT = targetDate.split('-').map(Number);
+            const targetYear = partsT[0];
+            const targetMonth = partsT[1];
+            const targetDay = partsT[2];
+
+            const py = getPersonalYear(birthDate, targetYear);
+            const pm = getPersonalMonth(birthDate, targetYear, targetMonth);
+            const pd = getPersonalDay(birthDate, targetDate);
+
+            let prognosisHtml = "";
+            if (py) {
+                const descYear = getDesc(desc.Prognosis, py.num);
+                prognosisHtml += `
+                    <div class="result-item">
+                        <span class="result-label">📅 Личный год (${targetYear})</span>
+                        <span class="result-value">${py.num} (аркан ${py.arcane} — ${arcaneNames[py.arcane]})</span>
+                        <div class="result-desc">${descYear}</div>
+                    </div>
+                `;
+            }
+            if (pm) {
+                const descMonth = getDesc(desc.Prognosis, pm.num);
+                prognosisHtml += `
+                    <div class="result-item">
+                        <span class="result-label">📆 Личный месяц (${targetMonth})</span>
+                        <span class="result-value">${pm.num} (аркан ${pm.arcane} — ${arcaneNames[pm.arcane]})</span>
+                        <div class="result-desc">${descMonth}</div>
+                    </div>
+                `;
+            }
+            if (pd) {
+                const descDay = getDesc(desc.Prognosis, pd.num);
+                prognosisHtml += `
+                    <div class="result-item">
+                        <span class="result-label">📋 Личный день (${targetDay})</span>
+                        <span class="result-value">${pd.num} (аркан ${pd.arcane} — ${arcaneNames[pd.arcane]})</span>
+                        <div class="result-desc">${descDay}</div>
+                    </div>
+                `;
+            }
+
+            // ----- Основные арканы и производные -----
+            function renderItem(label, value, descText) {
+                return `<div class="result-item"><span class="result-label">${label}</span><span class="result-value">${value} — ${arcaneNames[value]}</span><div class="result-desc">${descText || ''}</div></div>`;
+            }
+
+            let mainHtml = `
+                <div class="card"><h2>📊 ОСНОВНЫЕ АРКАНЫ</h2>
+                <div class="result-item"><span class="result-label">🔮 ДА (аркан дня)</span><span class="result-value">${data.daMain} — ${arcaneNames[data.daMain]}${data.daAdditional !== null ? ' / доп. '+data.daAdditional+' — '+arcaneNames[data.daAdditional] : ''}</span><div class="result-desc">Отражает прошлое воплощение, детство, характер.</div></div>
+                ${renderItem("МА (аркан месяца)", data.ma, "Связь с родом, задачи текущего воплощения.")}
+                ${renderItem("ГА (аркан года)", data.ga, "Зрелость, наработки для будущих воплощений.")}
+                ${renderItem("ЖА (аркан жизни)", data.ja, "Главный урок личности, сумма всех цифр даты.")}
+                <div class="result-item"><span class="result-label">🔢 Число Души</span><span class="result-value">${data.soulNumber}</span><div class="result-desc">День рождения, свернутый до 1-9.</div></div>
+                <div class="result-item"><span class="result-label">🌟 Число Судьбы</span><span class="result-value">${data.destinyNumber}</span><div class="result-desc">Сумма всех цифр даты, свернутая до 1-9.</div></div>
+            </div>`;
+
+            let doubleHtml = "";
+            if (data.doubleDA) {
+                doubleHtml = `<div class="double-da-block"><div class="double-da-title">🔮 ДВОЙНОЙ ДА (число ${data.day} > 22)</div>
+                    <div>Основной ДА: ${data.doubleDA.main} (${arcaneNames[data.doubleDA.main]})</div>
+                    <div>Дополнительный ДА: ${data.doubleDA.additional} (${arcaneNames[data.doubleDA.additional]})</div>
+                    <div style="font-size:0.8rem; color:#7a6856; margin-top:6px;">Для чисел 23–31 используются два варианта ДА. Ниже показаны расчёты для каждого.</div>
+                </div>`;
+            }
+
+            function renderDerived(label, val, descObj) {
+                const descText = descObj[val] || "—";
+                return `<div class="result-item"><span class="result-label">${label}</span><span class="result-value">${val} — ${arcaneNames[val]}</span><div class="result-desc">${descText}</div></div>`;
+            }
+
+            let derivedHtml = `<div class="card"><h2>🔮 ПРОИЗВОДНЫЕ ПОКАЗАТЕЛИ (основной ДА)</h2>`;
+            const main = data.main;
+            const add = data.additional;
+            derivedHtml += renderDerived("СЗ (Социальная задача)", main.sZ, desc.SZ);
+            derivedHtml += renderDerived("ОПВ1 (Ошибка прошлого воплощения)", main.opv1, desc.OPV);
+            derivedHtml += renderDerived("ТП (Точка препятствий)", main.tp, desc.TP);
+            derivedHtml += renderDerived("Основная сфера деятельности", main.zp, desc.ZP);
+            derivedHtml += renderDerived("Сфера выполняющая соц. задачи", main.zz, desc.ZZ);
+            derivedHtml += renderDerived("Самая доходная сфера", main.zd, desc.ZD);
+            derivedHtml += renderDerived("КУ1 (Кармический узел 1)", main.ku1, desc.KU1);
+            derivedHtml += renderDerived("КУ2 (Кармический узел 2)", main.ku2, desc.KU2);
+            derivedHtml += renderDerived("КУ3 (Кармический узел 3)", main.ku3, desc.KU3);
+            derivedHtml += renderDerived("КУ4 (Кармический узел 4)", main.ku4, desc.KU4);
+            derivedHtml += renderDerived("⚡ Сфера энергии", main.energySphere, desc.Energy);
+            derivedHtml += `</div>`;
+
+            if (add) {
+                derivedHtml += `<div class="card"><h2>🔮 ПРОИЗВОДНЫЕ ПОКАЗАТЕЛИ (дополнительный ДА)</h2>`;
+                derivedHtml += renderDerived("СЗ (доп.)", add.sZ, desc.SZ);
+                derivedHtml += renderDerived("ОПВ2 (доп.)", add.opv1, desc.OPV);
+                derivedHtml += renderDerived("ТП (доп.)", add.tp, desc.TP);
+                derivedHtml += renderDerived("Основная сфера деятельности (доп.)", add.zp, desc.ZP);
+                derivedHtml += renderDerived("Сфера выполняющая соц. задачи (доп.)", add.zz, desc.ZZ);
+                derivedHtml += renderDerived("Самая доходная сфера (доп.)", add.zd, desc.ZD);
+                derivedHtml += renderDerived("КУ1 (доп.)", add.ku1, desc.KU1);
+                derivedHtml += renderDerived("КУ2 (доп.)", add.ku2, desc.KU2);
+                derivedHtml += renderDerived("КУ3 (доп.)", add.ku3, desc.KU3);
+                derivedHtml += renderDerived("КУ4 (доп.)", add.ku4, desc.KU4);
+                derivedHtml += renderDerived("⚡ Сфера энергии (доп.)", add.energySphere, desc.Energy);
+                derivedHtml += `</div>`;
+            }
+
+            // ----- Программный код -----
+            const progDesc = desc.ProgramCode[data.programCode] || "—";
+            let progHtml = `<div class="card"><h2>💻 ПРОГРАММНЫЙ КОД</h2>
+                <div class="result-item"><span class="result-label">Код</span><span class="result-value">${data.programCode}</span><div class="result-desc">${progDesc}</div></div>
+            </div>`;
+
+            // ----- Энергия -----
+            let energyEA = `<div class="card"><h2>🔋 ЭНЕРГЕТИЧЕСКИЙ ПОТЕНЦИАЛ</h2>
+                <div class="result-item"><span class="result-label">Энергия Архангела (ЭА)</span><span class="result-value">${data.eaProduct.toLocaleString()} → сумма: ${data.eaSum}</span><div class="result-desc">Норма 26-28. ${data.eaSum < 26 ? 'Архангел не доверяет, не хватает энергии.' : data.eaSum > 28 ? 'Полное доверие, большая ответственность.' : 'Норма.'}</div></div>
+                <div class="result-item"><span class="result-label">Родовая энергия (ЭР)</span><span class="result-value">${data.erProduct.toLocaleString()} → сумма: ${data.erSum}</span><div class="result-desc">Норма 26-28. ${data.erSum < 26 ? 'Род не даёт силы.' : data.erSum > 28 ? 'Сильная родовая поддержка.' : 'Норма.'}</div></div>
+                <div class="result-item"><span class="result-label">📊 Срединная линия</span><span class="result-value">${data.midline}</span><div class="result-desc">Среднее арифметическое суммы цифр ЭА, делённое на 7.</div></div>
+            </div>`;
+
+            // ----- Изолированные -----
+            let isolatedHtml = "";
+            if (data.isolated.length > 0) {
+                let warn = `<div class="warning"><strong>⚠️ ВНИМАНИЕ! Изолированные цифры: ${data.isolated.join(', ')}</strong><br>`;
+                data.isolated.forEach(d => {
+                    warn += `Цифра ${d}: ${desc.Isolated[d] || "—"}<br>`;
+                });
+                warn += `Регрессивные практики (гипноз, прошлые жизни) категорически не рекомендуются! Цифры 7 и 9 особенно опасны.</div>`;
+                isolatedHtml = warn;
+            }
+
+            // ----- Имя -----
+            let nameHtml = `<div class="card"><h2>📛 ЧИСЛО И АРКАН ИМЕНИ</h2>
+                <div class="name-number-block"><strong>${firstName}</strong><br>
+                Число имени: ${nameNumber}<br>
+                Аркан имени: ${nameArc} — ${nameArcName}<br>
+                <span>Сумма букв: ${nameSum}</span>
+                </div>
+            </div>`;
+
+            // ----- Квадрат Пифагора -----
+            let pythCard = `<div class="card"><h2>📐 КВАДРАТ ПИФАГОРА (РОЖДЕНИЕ + ИМЯ)</h2>
+                ${pythHtml}
+                <div class="trait-list"><div class="trait-title">🔢 Трактовки цифр</div>${pythInterpret}</div>
+                ${arrowsHtml}
+            </div>`;
+
+            // ----- Родовая карта -----
+            let familyCard = `<div class="card"><h2>🌳 РОДОВАЯ КАРТА (ФАМИЛИЯ+ИМЯ+ОТЧЕСТВО)</h2>
+                ${familyHtml}
+                <div class="trait-list"><div class="trait-title">👥 Значение цифр в роду</div>${familyInterpret}</div>
+            </div>`;
+
+            // ----- Прогностика -----
+            let progCard = `<div class="card"><h2>📅 ПРОГНОСТИКА НА ${targetDate}</h2>
+                ${prognosisHtml}
+                <div style="font-size:0.8rem; color:#7a6856; margin-top:8px;">Число (1–9) и аркан (1–22) показывают энергетику периода.</div>
+            </div>`;
+
+            // ----- Сборка -----
+            const finalHtml = mainHtml + doubleHtml + derivedHtml + progHtml + energyEA + isolatedHtml + nameHtml + pythCard + familyCard + progCard;
+            document.getElementById('resultsArea').innerHTML = finalHtml;
+        } catch (e) {
+            document.getElementById('resultsArea').innerHTML = `<div class="card" style="color:#aa8866;">⚠️ Ошибка: ${e.message}</div>`;
+            console.error(e);
+        }
+    }
+
+    document.getElementById('calculateBtn').addEventListener('click', render);
+    window.addEventListener('DOMContentLoaded', render);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Графическая нумерология</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back-link">← Назад в меню</a>
+  <h1>📊 Графическая нумерология</h1>
+  <p class="sub">Энергия Архангела (Э.А.) и Энергия Рода (Э.Р.)</p>
+
+  <div class="card">
+    <div class="input-group">
+      <label>📅 Дата рождения</label>
+      <input type="date" id="birthDate" value="1969-12-07">
+    </div>
+    <button id="calcBtn" class="btn btn-primary">🔮 ПОСТРОИТЬ ГРАФИК</button>
+    <button id="pdfBtn" class="btn btn-pdf" style="margin-top:8px;">📄 ВЫВЕСТИ В PDF</button>
+  </div>
+
+  <div id="result" class="result"></div>
+
+  <div class="footer">
+    <div><span class="course">Курс «Кармическая Таронумерология»</span> • 2026</div>
+    <div class="paid-note">🔒 Базовые расчёты — бесплатно. Полная расшифровка и консультации — по запросу.</div>
+    <div style="margin-top:8px; font-size:0.85rem;">
+      Все права защищены. Материалы сайта предназначены для личного использования.
+      <br>Копирование и коммерческое использование без согласия автора запрещены.
+      <br><a href="#">О проекте</a> • <a href="#">Политика конфиденциальности</a> • <a href="#">Услуги и цены</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== ВЕСЬ ИСХОДНЫЙ JS-КОД ИЗ grafic_year.html =====
+(function() {
+    function pad2(n) { return String(n).padStart(2, '0'); }
+
+    function calcGraphs(birthDate) {
+        if (!birthDate) return null;
+        const parts = birthDate.split('-');
+        if (parts.length !== 3) return null;
+        const year = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10);
+        const day = parseInt(parts[2], 10);
+        if (isNaN(year) || isNaN(month) || isNaN(day)) return null;
+
+        const dmStr = pad2(day) + pad2(month);
+        const dmNum = parseInt(dmStr, 10);
+        const productEA = dmNum * year;
+        let prodStrEA = String(productEA);
+        while (prodStrEA.length < 7) prodStrEA += '0';
+        if (prodStrEA.length > 7) prodStrEA = prodStrEA.slice(0, 7);
+        const digitsEA = prodStrEA.split('').map(Number);
+        const sumEA = digitsEA.reduce((a,b) => a+b, 0);
+        const avgEA = sumEA / 7;
+
+        const productER = day * month * year;
+        let prodStrER = String(productER);
+        while (prodStrER.length < 7) prodStrER += '0';
+        if (prodStrER.length > 7) prodStrER = prodStrER.slice(0, 7);
+        const digitsER = prodStrER.split('').map(Number);
+        const sumER = digitsER.reduce((a,b) => a+b, 0);
+
+        const baseAges = [12, 24, 36, 48, 60, 72, 80];
+        const pointsEA = digitsEA.map((d, i) => ({ x: baseAges[i] + d, y: d }));
+        const pointsER = digitsER.map((d, i) => ({ x: baseAges[i] + d, y: d }));
+
+        const hasZeroEA = digitsEA.includes(0);
+        const hasZeroER = digitsER.includes(0);
+
+        let statusEA = '';
+        if (sumEA >= 26 && sumEA <= 28) statusEA = '✅ Норма (26–28) – карьера открыта';
+        else if (sumEA > 28) statusEA = '⬆️ Выше нормы – полное доверие Высших Сил';
+        else statusEA = '⬇️ Ниже нормы – не хватает энергии, берите из хобби';
+
+        let statusER = '';
+        if (sumER >= 26 && sumER <= 28) statusER = '✅ Норма – готов к продолжению рода';
+        else if (sumER > 28) statusER = '⬆️ Выше нормы – необходимость многодетности';
+        else statusER = '⬇️ Ниже нормы – сложности с зачатием, мало энергии';
+
+        const isAfter2000 = year >= 2000;
+
+        return {
+            digitsEA, sumEA, avgEA,
+            digitsER, sumER,
+            baseAges,
+            pointsEA, pointsER,
+            statusEA, statusER,
+            hasZeroEA, hasZeroER,
+            isAfter2000,
+            productEA, productER,
+            dmNum, year, day, month,
+            prodStrEA, prodStrER
+        };
+    }
+
+    function drawChart(data, container) {
+        if (!data) return;
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'chart-container';
+        const canvas = document.createElement('canvas');
+        wrapper.appendChild(canvas);
+        container.appendChild(wrapper);
+
+        const width = Math.min(480, window.innerWidth - 40);
+        const height = Math.max(340, width * 0.6);
+        canvas.width = width * 2;
+        canvas.height = height * 2;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+
+        const ctx = canvas.getContext('2d');
+        ctx.scale(2, 2);
+
+        const { pointsEA, pointsER, baseAges, avgEA } = data;
+        const numPoints = pointsEA.length;
+
+        const allX = [...pointsEA.map(p => p.x), ...pointsER.map(p => p.x)];
+        const minX = Math.min(...allX) - 2;
+        const maxX = Math.max(...allX) + 2;
+        const minY = 0;
+        const maxY = 9;
+
+        const pad = { top: 30, bottom: 40, left: 40, right: 20 };
+        const chartW = width - pad.left - pad.right;
+        const chartH = height - pad.top - pad.bottom;
+
+        function xPos(xVal) {
+            return pad.left + ((xVal - minX) / (maxX - minX)) * chartW;
+        }
+        function yPos(yVal) {
+            return pad.top + chartH - ((yVal - minY) / (maxY - minY)) * chartH;
+        }
+
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.strokeStyle = '#e0d6c6';
+        ctx.lineWidth = 0.5;
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#888';
+        ctx.font = '11px sans-serif';
+        for (let v = 0; v <= 9; v++) {
+            const y = yPos(v);
+            ctx.beginPath();
+            ctx.moveTo(pad.left, y);
+            ctx.lineTo(width - pad.right, y);
+            ctx.stroke();
+            ctx.fillStyle = '#888';
+            ctx.fillText(v.toString(), pad.left - 8, y);
+        }
+
+        ctx.save();
+        ctx.translate(14, height / 2);
+        ctx.rotate(-Math.PI / 2);
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#555';
+        ctx.font = '11px sans-serif';
+        ctx.fillText('Значение', 0, 0);
+        ctx.restore();
+
+        for (let i = 0; i < baseAges.length; i++) {
+            const age = baseAges[i];
+            const xLabel = xPos(age);
+            ctx.fillStyle = '#888';
+            ctx.textBaseline = 'top';
+            ctx.fillText(age.toString(), xLabel, height - pad.bottom + 4);
+            if (i % 2 === 0) {
+                ctx.beginPath();
+                ctx.moveTo(xLabel, pad.top);
+                ctx.lineTo(xLabel, height - pad.bottom);
+                ctx.strokeStyle = '#e0d6c6';
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+        ctx.fillStyle = '#555';
+        ctx.font = '11px sans-serif';
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'center';
+        ctx.fillText('Возраст (исходный)', width / 2, height - 2);
+
+        const datasets = [
+            { points: pointsEA, color: '#2c3e50', label: 'Э.А.', dash: [] },
+            { points: pointsER, color: '#e74c3c', label: 'Э.Р.', dash: [5, 3] }
+        ];
+
+        datasets.forEach(ds => {
+            const pts = ds.points;
+            ctx.beginPath();
+            for (let i = 0; i < pts.length; i++) {
+                const x = xPos(pts[i].x);
+                const y = yPos(pts[i].y);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.strokeStyle = ds.color;
+            ctx.lineWidth = ds.label === 'Э.А.' ? 2.5 : 2;
+            ctx.setLineDash(ds.dash);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            for (let i = 0; i < pts.length; i++) {
+                const x = xPos(pts[i].x);
+                const y = yPos(pts[i].y);
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fillStyle = ds.color;
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                if (pts[i].y === 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(x - 5, y - 5);
+                    ctx.lineTo(x + 5, y + 5);
+                    ctx.moveTo(x + 5, y - 5);
+                    ctx.lineTo(x - 5, y + 5);
+                    ctx.strokeStyle = '#c0392b';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            }
+        });
+
+        const avgY = yPos(avgEA);
+        ctx.beginPath();
+        ctx.moveTo(pad.left, avgY);
+        ctx.lineTo(width - pad.right, avgY);
+        ctx.strokeStyle = '#e67e22';
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = '#e67e22';
+        ctx.font = '10px sans-serif';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText('средняя ' + avgEA.toFixed(2), width - pad.right - 4, avgY - 2);
+
+        const legendDiv = document.createElement('div');
+        legendDiv.className = 'legend';
+        legendDiv.innerHTML = `
+            <div class="legend-item"><span class="legend-color ea"></span> Э.А. (синий)</div>
+            <div class="legend-item"><span class="legend-color er"></span> Э.Р. (красный, пунктир)</div>
+            <div style="font-size:12px; color:#888;">○ ноль – ⚠️ опасный период</div>
+        `;
+        wrapper.insertBefore(legendDiv, canvas);
+
+        const statsDiv = document.createElement('div');
+        statsDiv.className = 'stats';
+        statsDiv.innerHTML = `
+            <span>Э.А. сумма = ${data.sumEA} (${data.statusEA})</span>
+            <span>Э.Р. сумма = ${data.sumER} (${data.statusER})</span>
+        `;
+        wrapper.appendChild(statsDiv);
+    }
+
+    function render() {
+        const date = document.getElementById('birthDate').value;
+        const resultDiv = document.getElementById('result');
+        if (!date) {
+            resultDiv.innerHTML = '<div class="card" style="color:#aa8866;">⚠️ Выберите дату рождения.</div>';
+            return;
+        }
+        const data = calcGraphs(date);
+        if (!data) {
+            resultDiv.innerHTML = '<div class="card" style="color:#aa8866;">⚠️ Ошибка в дате.</div>';
+            return;
+        }
+
+        resultDiv.innerHTML = '';
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h3>📈 Графики Э.А. и Э.Р.</h3>`;
+        resultDiv.appendChild(card);
+        drawChart(data, card);
+
+        const infoCard = document.createElement('div');
+        infoCard.className = 'card';
+        let infoHtml = `<h3>📊 Расчёт</h3>`;
+        infoHtml += `<p><strong>Э.А.:</strong> ${data.dmNum} × ${data.year} = ${data.productEA} → ${data.prodStrEA} → цифры: ${data.digitsEA.join(', ')}</p>`;
+        infoHtml += `<p><strong>Э.Р.:</strong> ${data.day} × ${data.month} × ${data.year} = ${data.productER} → ${data.prodStrER} → цифры: ${data.digitsER.join(', ')}</p>`;
+        infoHtml += `<p class="info-line"><strong>Э.А. сумма:</strong> ${data.sumEA} — ${data.statusEA}</p>`;
+        infoHtml += `<p class="info-line"><strong>Э.Р. сумма:</strong> ${data.sumER} — ${data.statusER}</p>`;
+        infoHtml += `<p class="info-line"><strong>Построение:</strong> к 12 прибавляем 1-ю цифру, к 24 – 2-ю и т.д. Точки: ${data.digitsEA.map((d,i) => `${data.baseAges[i]}+${d}=${data.baseAges[i]+d}`).join('; ')}</p>`;
+        if (data.hasZeroEA) infoHtml += `<div class="warning">⚠️ В Э.А. присутствует 0 – опасный период, берегите себя!</div>`;
+        if (data.hasZeroER) infoHtml += `<div class="warning">⚠️ В Э.Р. присутствует 0 – проблемы с продолжением рода!</div>`;
+        if (data.isAfter2000) infoHtml += `<div class="warning">⚠️ Рождённые после 2000 года: графики могут «ломаться».</div>`;
+        infoCard.innerHTML = infoHtml;
+        resultDiv.appendChild(infoCard);
+    }
+
+    document.getElementById('calcBtn').addEventListener('click', render);
+    document.getElementById('pdfBtn').addEventListener('click', () => window.print());
+    window.addEventListener('DOMContentLoaded', render);
+})();
+</script>
+</body>
+</html>
