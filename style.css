@@ -1,4 +1,4 @@
-/* ===== БАЗОВЫЕ СТИЛИ ===== */
+/* ===== БАЗОВЫЕ СТИЛИ (СВЕТЛАЯ ВЕРСИЯ) ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,102 +7,102 @@
 
 :root {
   /* ===== ФОНЫ ===== */
-  --bg-body: #0d1b2a;
-  --bg-body-gradient: radial-gradient(circle at 30% 20%, #1a0f2e 0%, #0a0612 100%);
-  --bg-container: rgba(13, 27, 42, 0.85);
-  --bg-card: rgba(26, 15, 46, 0.7);
-  --bg-card-hover: rgba(40, 25, 60, 0.9);
-  --bg-input: rgba(26, 15, 46, 0.6);
-  --bg-cell: rgba(26, 15, 46, 0.5);
-  --bg-missing: rgba(92, 26, 26, 0.2);
-  --bg-trait: rgba(26, 15, 46, 0.5);
-  --bg-name-block: rgba(26, 15, 46, 0.5);
-  --bg-double-da: rgba(212, 175, 55, 0.1);
-  --bg-warning: rgba(92, 26, 26, 0.2);
-  --bg-zero: rgba(92, 26, 26, 0.3);
-  --bg-karmic-row: rgba(212, 175, 55, 0.15);
-  --bg-unsolved: rgba(212, 175, 55, 0.1);
-  --bg-modal: #1a0f2e;
-  --bg-modal-desc: rgba(26, 15, 46, 0.5);
-  --bg-result-card: rgba(26, 15, 46, 0.7);
-  --bg-result-desc: rgba(26, 15, 46, 0.4);
-  --bg-legend: rgba(26, 15, 46, 0.5);
-  --bg-stats: rgba(26, 15, 46, 0.5);
-  --bg-footer-course: rgba(212, 175, 55, 0.15);
-  --bg-paid-note: rgba(212, 175, 55, 0.1);
-  --bg-back-link: #d4af37;
-  --bg-back-link-hover: #b8952a;
+  --bg-body: #f3edf7;
+  --bg-body-gradient: radial-gradient(circle at 30% 20%, #faf5ff 0%, #ede4f5 100%);
+  --bg-container: rgba(255, 250, 255, 0.75);
+  --bg-card: rgba(255, 248, 255, 0.7);
+  --bg-card-hover: #ffffff;
+  --bg-input: rgba(255, 248, 255, 0.6);
+  --bg-cell: rgba(245, 235, 250, 0.6);
+  --bg-missing: rgba(200, 170, 210, 0.2);
+  --bg-trait: rgba(245, 235, 250, 0.4);
+  --bg-name-block: rgba(245, 235, 250, 0.4);
+  --bg-double-da: rgba(180, 80, 100, 0.08);
+  --bg-warning: rgba(200, 170, 210, 0.15);
+  --bg-zero: rgba(200, 170, 210, 0.2);
+  --bg-karmic-row: rgba(180, 80, 100, 0.1);
+  --bg-unsolved: rgba(212, 175, 55, 0.08);
+  --bg-modal: #ffffff;
+  --bg-modal-desc: rgba(245, 235, 250, 0.4);
+  --bg-result-card: rgba(255, 248, 255, 0.7);
+  --bg-result-desc: rgba(245, 235, 250, 0.3);
+  --bg-legend: rgba(245, 235, 250, 0.4);
+  --bg-stats: rgba(245, 235, 250, 0.4);
+  --bg-footer-course: rgba(180, 80, 100, 0.1);
+  --bg-paid-note: rgba(180, 80, 100, 0.05);
+  --bg-back-link: #b8a0c8;
+  --bg-back-link-hover: #9a80aa;
 
   /* ===== ТЕКСТ ===== */
-  --text-primary: #f0e6d0;
-  --text-secondary: #b8c8d8;
-  --text-muted: #8a9aaa;
+  --text-primary: #3a2a4a;
+  --text-secondary: #5a4a6a;
+  --text-muted: #8a7a9a;
   --text-light: #ffffff;
-  --text-subtitle: #b8c8d8;
-  --text-desc: #a8b5c4;
-  --text-footer: #8a9aaa;
-  --text-footer-course: #d4af37;
-  --text-link: #d4af37;
-  --text-link-hover: #f0d080;
-  --text-warning: #f0d0c0;
-  --text-warning-strong: #e08060;
-  --text-zero: #f0d0c0;
-  --text-cell: #f0e6d0;
-  --text-cell-missing: #a8b5c4;
-  --text-trait-title: #f0e6d0;
-  --text-badge: #f0e6d0;
-  --text-name-number: #d4af37;
-  --text-double-da: #d4af37;
-  --text-stats: #b8c8d8;
-  --text-legend: #b8c8d8;
-  --text-card-item: #f0e6d0;
-  --text-card-item-number: #8a9aaa;
-  --text-card-item-name: #f0e6d0;
-  --text-modal-title: #f0e6d0;
+  --text-subtitle: #5a4a6a;
+  --text-desc: #6a5a7a;
+  --text-footer: #8a7a9a;
+  --text-footer-course: #7a4a6a;
+  --text-link: #b8a0c8;
+  --text-link-hover: #8a6a9a;
+  --text-warning: #4a3a5a;
+  --text-warning-strong: #a05050;
+  --text-zero: #7a4a5a;
+  --text-cell: #3a2a4a;
+  --text-cell-missing: #8a7a9a;
+  --text-trait-title: #3a2a4a;
+  --text-badge: #3a2a4a;
+  --text-name-number: #b8a0c8;
+  --text-double-da: #3a2a4a;
+  --text-stats: #5a4a6a;
+  --text-legend: #5a4a6a;
+  --text-card-item: #3a2a4a;
+  --text-card-item-number: #8a7a9a;
+  --text-card-item-name: #3a2a4a;
+  --text-modal-title: #3a2a4a;
 
   /* ===== АКЦЕНТЫ ===== */
-  --accent: #d4af37;               /* золотой – главный акцент */
-  --accent-light: #f0d080;
-  --accent-dark: #b8952a;
-  --accent-secondary: #5c1a1a;     /* бордо – благородный */
+  --accent: #b8a0c8;               /* серебристо-фиолетовый */
+  --accent-light: #d0c0e0;
+  --accent-dark: #9a80aa;
+  --accent-secondary: #8a4a5a;     /* благородное бордо */
 
   /* ===== ГРАНИЦЫ ===== */
-  --border-color: rgba(212, 175, 55, 0.3);
-  --border-light: rgba(212, 175, 55, 0.15);
-  --border-input: rgba(212, 175, 55, 0.3);
-  --border-input-focus: #d4af37;
-  --border-cell: rgba(212, 175, 55, 0.3);
-  --border-cell-missing: rgba(92, 26, 26, 0.3);
-  --border-badge: rgba(212, 175, 55, 0.2);
-  --border-name-block: rgba(212, 175, 55, 0.2);
-  --border-modal: rgba(212, 175, 55, 0.2);
-  --border-result-card: rgba(212, 175, 55, 0.2);
+  --border-color: rgba(180, 80, 100, 0.15);
+  --border-light: rgba(180, 80, 100, 0.08);
+  --border-input: rgba(180, 80, 100, 0.15);
+  --border-input-focus: #b8a0c8;
+  --border-cell: rgba(180, 80, 100, 0.15);
+  --border-cell-missing: rgba(180, 80, 100, 0.1);
+  --border-badge: rgba(180, 80, 100, 0.1);
+  --border-name-block: rgba(180, 80, 100, 0.1);
+  --border-modal: rgba(180, 80, 100, 0.1);
+  --border-result-card: rgba(180, 80, 100, 0.1);
 
   /* ===== КНОПКИ ===== */
-  --btn-bg: linear-gradient(135deg, #d4af37, #b8952a);          /* золото */
-  --btn-bg-hover: linear-gradient(135deg, #e8c84a, #c9a832);
-  --btn-text: #1a0f2e;
-  --btn-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  --btn-shadow-hover: 0 8px 25px rgba(212, 175, 55, 0.5);
+  --btn-bg: linear-gradient(135deg, #b8a0c8, #9a80aa);   /* серебристый фиолет */
+  --btn-bg-hover: linear-gradient(135deg, #c8b0d8, #b8a0c8);
+  --btn-text: #ffffff;
+  --btn-shadow: 0 4px 15px rgba(180, 160, 200, 0.3);
+  --btn-shadow-hover: 0 8px 25px rgba(180, 160, 200, 0.4);
 
-  --btn-primary-bg: linear-gradient(135deg, #5c1a1a, #3a0a0a); /* бордо */
-  --btn-primary-hover: linear-gradient(135deg, #7a2828, #5c1a1a);
-  --btn-primary-shadow: 0 4px 15px rgba(92, 26, 26, 0.4);
-  --btn-primary-shadow-hover: 0 8px 25px rgba(92, 26, 26, 0.5);
+  --btn-primary-bg: linear-gradient(135deg, #8a4a5a, #6a3a4a); /* бордо */
+  --btn-primary-hover: linear-gradient(135deg, #a05a6a, #8a4a5a);
+  --btn-primary-shadow: 0 4px 15px rgba(138, 74, 90, 0.3);
+  --btn-primary-shadow-hover: 0 8px 25px rgba(138, 74, 90, 0.4);
 
-  --btn-pdf-bg: linear-gradient(135deg, #1a5c3a, #0a3a20);    /* изумруд (для PDF) */
-  --btn-pdf-hover: linear-gradient(135deg, #2a7a50, #1a5c3a);
-  --btn-pdf-shadow: 0 4px 15px rgba(26, 92, 58, 0.4);
-  --btn-pdf-shadow-hover: 0 8px 25px rgba(26, 92, 58, 0.5);
+  --btn-pdf-bg: linear-gradient(135deg, #b8a0c8, #9a80aa); /* серебро */
+  --btn-pdf-hover: linear-gradient(135deg, #c8b0d8, #b8a0c8);
+  --btn-pdf-shadow: 0 4px 15px rgba(180, 160, 200, 0.3);
+  --btn-pdf-shadow-hover: 0 8px 25px rgba(180, 160, 200, 0.4);
 
   /* ===== ТЕНИ ===== */
-  --shadow-card: 0 6px 18px rgba(0,0,0,0.6);
-  --shadow-hover: 0 16px 40px rgba(212, 175, 55, 0.15);
-  --shadow-container: 0 30px 60px rgba(0,0,0,0.6);
-  --shadow-table: 0 4px 12px rgba(0,0,0,0.3);
-  --shadow-result: 0 4px 10px rgba(0,0,0,0.4);
-  --shadow-chart: 0 4px 12px rgba(0,0,0,0.2);
-  --shadow-modal: 0 30px 60px rgba(0,0,0,0.6);
+  --shadow-card: 0 6px 18px rgba(120, 100, 140, 0.08);
+  --shadow-hover: 0 16px 40px rgba(180, 160, 200, 0.15);
+  --shadow-container: 0 30px 60px rgba(120, 100, 140, 0.08);
+  --shadow-table: 0 4px 12px rgba(120, 100, 140, 0.06);
+  --shadow-result: 0 4px 10px rgba(0,0,0,0.06);
+  --shadow-chart: 0 4px 12px rgba(0,0,0,0.02);
+  --shadow-modal: 0 30px 60px rgba(0,0,0,0.1);
 
   /* ===== ШРИФТЫ ===== */
   --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
@@ -142,13 +142,13 @@ h1 {
   letter-spacing: 2px;
 }
 h1 span {
-  color: var(--accent);
+  color: var(--accent-dark);
 }
 h2 {
   font-size: 2rem;
   color: var(--text-primary);
   margin: 1em 0 0.5em;
-  border-left: 6px solid var(--accent);
+  border-left: 6px solid var(--accent-secondary);
   padding-left: 16px;
 }
 h3 {
@@ -218,7 +218,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--border-input-focus);
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 0 0 3px rgba(180, 160, 200, 0.2);
 }
 input[type="date"] {
   -webkit-appearance: none;
@@ -282,7 +282,7 @@ button:active {
 table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(26, 15, 46, 0.4);
+  background: rgba(245, 235, 250, 0.3);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow-table);
@@ -290,15 +290,15 @@ table {
   min-width: 600px;
 }
 th {
-  background: rgba(92, 26, 26, 0.3);
-  color: #f0e6d0;
+  background: rgba(180, 80, 100, 0.08);
+  color: var(--text-primary);
   font-weight: 600;
   padding: 12px 15px;
   text-align: left;
 }
 td {
   padding: 10px 15px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  border-bottom: 1px solid var(--border-color);
   word-break: break-word;
   color: var(--text-secondary);
 }
@@ -306,7 +306,7 @@ tr:last-child td {
   border-bottom: none;
 }
 tr:hover {
-  background: rgba(212, 175, 55, 0.05);
+  background: rgba(180, 160, 200, 0.05);
 }
 .karmic-row {
   background-color: var(--bg-karmic-row) !important;
@@ -329,18 +329,18 @@ li {
 
 /* ===== БЛОКИ РЕЗУЛЬТАТОВ ===== */
 .result-block {
-  background: rgba(26, 15, 46, 0.4);
+  background: rgba(245, 235, 250, 0.3);
   border-radius: 20px;
   padding: 18px 16px;
   margin: 12px 0;
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--accent-secondary);
 }
 .result-item {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 .result-label {
   font-weight: 600;
@@ -351,7 +351,7 @@ li {
 .result-value {
   font-weight: 500;
   color: var(--text-secondary);
-  background: rgba(26, 15, 46, 0.4);
+  background: rgba(245, 235, 250, 0.3);
   padding: 4px 12px;
   border-radius: 30px;
   flex: 1 1 auto;
@@ -428,13 +428,13 @@ li {
 .trait-title {
   color: var(--text-trait-title);
   font-weight: bold;
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--accent-secondary);
   padding-left: 10px;
   margin-bottom: 10px;
 }
 .badge {
   display: inline-block;
-  background: rgba(26, 15, 46, 0.6);
+  background: rgba(245, 235, 250, 0.4);
   padding: 4px 12px;
   border-radius: 30px;
   font-size: 0.75rem;
@@ -458,7 +458,7 @@ li {
 }
 .double-da-block {
   background: var(--bg-double-da);
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--accent-secondary);
   padding: 12px 16px;
   margin: 12px 0;
   border-radius: 16px;
@@ -472,7 +472,7 @@ li {
 .chart-container {
   width: 100%;
   margin: 10px auto;
-  background: #0d1b2a;
+  background: #faf5ff;
   border-radius: 16px;
   padding: 10px;
   box-shadow: var(--shadow-chart);
@@ -482,7 +482,7 @@ canvas {
   height: auto !important;
   display: block;
   border-radius: 12px;
-  background: #0d1b2a;
+  background: #faf5ff;
 }
 .legend {
   display: flex;
@@ -503,10 +503,10 @@ canvas {
   height: 4px;
   border-radius: 4px;
 }
-.legend-color.man { background: #a8b5c4; }   /* серебро */
-.legend-color.woman { background: #5c1a1a; } /* бордо */
-.legend-color.ea { background: #d4af37; }    /* золото */
-.legend-color.er { background: #5c1a1a; }    /* бордо */
+.legend-color.man { background: #b8a0c8; }
+.legend-color.woman { background: #8a4a5a; }
+.legend-color.ea { background: #b8a0c8; }
+.legend-color.er { background: #8a4a5a; }
 
 .stats {
   display: flex;
@@ -537,14 +537,14 @@ canvas {
   padding: 10px 5px;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 8px rgba(120, 100, 140, 0.06);
   transition: 0.3s;
   border: 2px solid transparent;
 }
 .card-item:hover {
   transform: translateY(-5px);
   border-color: var(--accent);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 20px rgba(120, 100, 140, 0.1);
 }
 .card-item img {
   width: 100%;
@@ -573,7 +573,7 @@ canvas {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.2);
   backdrop-filter: blur(4px);
   justify-content: center;
   align-items: center;
@@ -696,7 +696,7 @@ canvas {
   margin: 10px 0 20px;
   padding: 8px 20px;
   background: var(--bg-back-link);
-  color: #1a0f2e;
+  color: #ffffff;
   border-radius: 40px;
   text-decoration: none;
   font-weight: 500;
@@ -841,7 +841,7 @@ canvas {
     padding: 6px;
   }
   .double-da-block {
-    border-left: 2px solid var(--accent);
+    border-left: 2px solid var(--accent-secondary);
   }
   .trait-list {
     background: #f9f9f9;
@@ -876,7 +876,7 @@ canvas {
   }
 }
 
-/* ===== СКРЫТЬ КНОПКИ PDF (если они всё ещё нужны) ===== */
+/* ===== СКРЫТЬ КНОПКИ PDF (если нужно) ===== */
 .btn-pdf {
   display: none !important;
 }
