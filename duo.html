@@ -440,14 +440,14 @@
     }
 
     document.getElementById('calcBtn').addEventListener('click', render);
+
+    // ===== PDF ОБРАБОТЧИК (БЕЗ ПРОВЕРОК) =====
     document.getElementById('pdfBtn').addEventListener('click', function() {
-        var res = document.getElementById('results');
-        if (res.innerHTML.trim() === '' || res.innerHTML.indexOf('⚠️') !== -1) {
-            alert('Сначала выполните расчёт (нажмите "РАССЧИТАТЬ")');
-            return;
-        }
-        window.print();
+        setTimeout(function() {
+            window.print();
+        }, 300);
     });
+
     window.addEventListener('DOMContentLoaded', render);
 })();
 </script>
