@@ -899,7 +899,7 @@ canvas {
 }
 /* ===== ФОН С КАРТИНКОЙ С КОМПЬЮТЕРА ===== */
 body {
-  background-image: url('cosmos.jpg');  /* замените на имя вашего файла */
+  background-image: url('cosmoss.jpg');  /* замените на имя вашего файла */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
