@@ -51,9 +51,7 @@
 
 <script>
 // ===== ВЕСЬ ВАШ ИСХОДНЫЙ JS-КОД (БЕЗ ИЗМЕНЕНИЙ) =====
-// Я копирую его из вашего сообщения целиком.
 (function() {
-    // ======================== ОБЩИЕ ФУНКЦИИ ========================
     function toArcane(num) {
         if (num === 0) return 22;
         let result = num;
@@ -80,7 +78,6 @@
         return clean.split('').map(Number).filter(n => !isNaN(n));
     }
 
-    // ======================== БУКВИЦА ========================
     const letterMap = {
         'А':1,'Б':2,'В':3,'Г':4,'Д':5,'Е':6,'Ё':7,'Ж':8,'З':9,
         'И':1,'Й':2,'К':3,'Л':4,'М':5,'Н':6,'О':7,'П':8,'Р':9,
@@ -105,7 +102,6 @@
         return counts;
     }
 
-    // ======================== АРКАНЫ И ИМЕНА ========================
     const arcaneNames = {
         1: "Маг", 2: "Верховная Жрица", 3: "Императрица", 4: "Император",
         5: "Иерофант", 6: "Влюблённые", 7: "Колесница", 8: "Правосудие",
@@ -115,7 +111,6 @@
         21: "Мир", 22: "Шут"
     };
 
-    // ======================== РАСЧЁТ ПО ДАТЕ РОЖДЕНИЯ ========================
     function getDoubleDA(day) {
         if (day >= 23 && day <= 31) {
             const map = {
@@ -176,7 +171,6 @@
             additional = calcDerived(daAdditional);
         }
 
-        // Энергия Архангела
         let dayStr = day.toString().padStart(2, '0');
         let monthStr = month.toString().padStart(2, '0');
         let dm = parseInt(dayStr + monthStr, 10);
@@ -186,7 +180,6 @@
         let erProduct = day * month * year;
         let erSum = digitSum(erProduct);
 
-        // Срединная линия
         const midline = (eaSum / 7).toFixed(2);
 
         let fullNumber = parseInt(dayStr + monthStr + year.toString(), 10);
@@ -216,7 +209,6 @@
         };
     }
 
-    // ======================== КВАДРАТ ПИФАГОРА ========================
     function getPythagorasSquare(birthDate, firstName) {
         const birthDigits = getBirthDigits(birthDate);
         const nameDigits = stringToDigits(firstName);
@@ -230,7 +222,6 @@
         return countDigits(all);
     }
 
-    // ======================== ПРОГНОСТИКА ========================
     function getPersonalYear(birthDate, targetYear) {
         if (!birthDate || !targetYear) return null;
         const parts = birthDate.split('-').map(Number);
@@ -275,7 +266,6 @@
         return { num, arcane };
     }
 
-    // ======================== РАСШИФРОВКИ ========================
     const socialTasks = {
         1: "Передавать знания устно, быть оратором, наставником.",
         2: "Заботиться о природе, животных, женщинах, развивать интуицию.",
@@ -303,8 +293,7 @@
 
     const desc = {
         SZ: socialTasks,
-        ZZ: socialTasks,  // теперь здесь социальные задачи
-
+        ZZ: socialTasks,
         OPV: {
             1: "Предал брата/сестру. Задача: поддерживать их.",
             2: "Предал маму. Задача: помогать маме.",
@@ -533,66 +522,15 @@
             9: "Завершение, благотворительность, отпускание."
         },
         Pythagoras: {
-            1: {
-                0: "Не любит общение, выдерживает 30 мин.",
-                1: "Говорит конструктивно, устаёт от людей.",
-                2: "Управляет речью, любит творчество.",
-                3: "Любит поговорить, боится одиночества.",
-                4: "Дар писательства, речь закольцована.",
-                5: "Эзотерический талант, пророчество."
-            },
-            2: {
-                0: "Крепкая психика, логик.",
-                1: "Хорошая психика, чувствует любимых.",
-                2: "Подвижная психика, ранимый.",
-                3: "Руки-пылесос, экстрасенсорика.",
-                4: "Высокие вибрации, тактильный контакт опасен."
-            },
-            3: {
-                0: "Память кашеобразная.",
-                1: "Структурная память, нужны схемы.",
-                2: "Хорошая память.",
-                3: "Домысливает, берёт всю информацию.",
-                4: "Подключён к инфополю Земли, инсайты."
-            },
-            4: {
-                0: "Не думает о порядке, трудно доводит до конца.",
-                1: "Практичность, доводит дела.",
-                2: "Живёт по инструкции.",
-                3: "Реализуется в любой области.",
-                4: "Профессионал, усовершенствует ремесло."
-            },
-            5: {
-                0: "Всё принимает близко к сердцу.",
-                1: "Осознаёт себя, тактичен.",
-                2: "Исцеляет словом, навязчивый.",
-                3: "Тянет одеяло на себя."
-            },
-            6: {
-                0: "Где я, там и дом, не стремится к браку.",
-                1: "Семья важна, готовит быстро.",
-                2: "Заботливый, любит готовить.",
-                3: "Болезненно относится к близким."
-            },
-            7: {
-                0: "Один ангел-хранитель, повтор сценариев раз в 9 лет.",
-                1: "Второй ангел-хранитель, прислушивается.",
-                2: "Три ангела-хранителя.",
-                3: "Вещие сны, может призвать ангела."
-            },
-            8: {
-                0: "Мыслит глобально, видит результат.",
-                1: "Ценит процесс, детали.",
-                2: "Придирчив к словам.",
-                3: "Читает приметы, анализ."
-            },
-            9: {
-                0: "Логика не работает, только интуиция.",
-                1: "Логическое мышление есть.",
-                2: "Дар сновидения, вещие сны.",
-                3: "Яснознание, ясновидение.",
-                4: "Знак пророка."
-            }
+            1: {0: "Не любит общение, выдерживает 30 мин.",1: "Говорит конструктивно, устаёт от людей.",2: "Управляет речью, любит творчество.",3: "Любит поговорить, боится одиночества.",4: "Дар писательства, речь закольцована.",5: "Эзотерический талант, пророчество."},
+            2: {0: "Крепкая психика, логик.",1: "Хорошая психика, чувствует любимых.",2: "Подвижная психика, ранимый.",3: "Руки-пылесос, экстрасенсорика.",4: "Высокие вибрации, тактильный контакт опасен."},
+            3: {0: "Память кашеобразная.",1: "Структурная память, нужны схемы.",2: "Хорошая память.",3: "Домысливает, берёт всю информацию.",4: "Подключён к инфополю Земли, инсайты."},
+            4: {0: "Не думает о порядке, трудно доводит до конца.",1: "Практичность, доводит дела.",2: "Живёт по инструкции.",3: "Реализуется в любой области.",4: "Профессионал, усовершенствует ремесло."},
+            5: {0: "Всё принимает близко к сердцу.",1: "Осознаёт себя, тактичен.",2: "Исцеляет словом, навязчивый.",3: "Тянет одеяло на себя."},
+            6: {0: "Где я, там и дом, не стремится к браку.",1: "Семья важна, готовит быстро.",2: "Заботливый, любит готовить.",3: "Болезненно относится к близким."},
+            7: {0: "Один ангел-хранитель, повтор сценариев раз в 9 лет.",1: "Второй ангел-хранитель, прислушивается.",2: "Три ангела-хранителя.",3: "Вещие сны, может призвать ангела."},
+            8: {0: "Мыслит глобально, видит результат.",1: "Ценит процесс, детали.",2: "Придирчив к словам.",3: "Читает приметы, анализ."},
+            9: {0: "Логика не работает, только интуиция.",1: "Логическое мышление есть.",2: "Дар сновидения, вещие сны.",3: "Яснознание, ясновидение.",4: "Знак пророка."}
         },
         Isolated: {
             1: "Хранитель фундаментального знания, метафизик. В прошлой жизни убит. Нельзя проводить регрессию.",
@@ -615,7 +553,6 @@
         return (obj && obj[key]) ? obj[key] : "—";
     }
 
-    // ======================== ОСНОВНОЙ РАСЧЁТ ========================
     function render() {
         try {
             const birthDate = document.getElementById('birthDate').value;
@@ -635,7 +572,6 @@
                 return;
             }
 
-            // ----- Квадрат Пифагора -----
             const pythCounts = getPythagorasSquare(birthDate, firstName);
             const rows = [[3,6,9],[2,5,8],[1,4,7]];
             function renderCell(d) {
@@ -677,7 +613,6 @@
             let arrowsHtml = `<div class="trait-list"><div class="trait-title">⚡ Стрелы силы</div>${arrowsStrength.map(s=>`<div>✅ ${s}</div>`).join('') || '<i>Нет активных</i>'}</div>`;
             arrowsHtml += `<div class="trait-list"><div class="trait-title">⚠️ Стрелы слабости</div>${arrowsWeak.map(s=>`<div>🔻 ${s}</div>`).join('') || '<i>Нет слабостей</i>'}</div>`;
 
-            // ----- Родовая карта -----
             const familyCounts = getFamilyCounts(lastName, firstName, middleName);
             let familyHtml = `<div class="pythagoras-square"><div class="square-grid">`;
             rows.forEach(row => row.forEach(d => {
@@ -697,14 +632,12 @@
                 familyInterpret += `<div class="badge"><strong>${d}</strong> (${cnt}): ${descText}</div>`;
             }
 
-            // ----- Число имени -----
             const nameDigits = stringToDigits(firstName);
             const nameSum = nameDigits.reduce((a,b)=>a+b,0);
             const nameNumber = toSingleDigit(nameSum);
             const nameArc = toArcane(nameSum);
             const nameArcName = arcaneNames[nameArc] || "Аркан";
 
-            // ----- ПРОГНОСТИКА -----
             let targetDate;
             if (prognosisDate) {
                 targetDate = prognosisDate;
@@ -756,7 +689,6 @@
                 `;
             }
 
-            // ----- Основные арканы и производные -----
             function renderItem(label, value, descText) {
                 return `<div class="result-item"><span class="result-label">${label}</span><span class="result-value">${value} — ${arcaneNames[value]}</span><div class="result-desc">${descText || ''}</div></div>`;
             }
@@ -817,20 +749,17 @@
                 derivedHtml += `</div>`;
             }
 
-            // ----- Программный код -----
             const progDesc = desc.ProgramCode[data.programCode] || "—";
             let progHtml = `<div class="card"><h2>💻 ПРОГРАММНЫЙ КОД</h2>
                 <div class="result-item"><span class="result-label">Код</span><span class="result-value">${data.programCode}</span><div class="result-desc">${progDesc}</div></div>
             </div>`;
 
-            // ----- Энергия -----
             let energyEA = `<div class="card"><h2>🔋 ЭНЕРГЕТИЧЕСКИЙ ПОТЕНЦИАЛ</h2>
                 <div class="result-item"><span class="result-label">Энергия Архангела (ЭА)</span><span class="result-value">${data.eaProduct.toLocaleString()} → сумма: ${data.eaSum}</span><div class="result-desc">Норма 26-28. ${data.eaSum < 26 ? 'Архангел не доверяет, не хватает энергии.' : data.eaSum > 28 ? 'Полное доверие, большая ответственность.' : 'Норма.'}</div></div>
                 <div class="result-item"><span class="result-label">Родовая энергия (ЭР)</span><span class="result-value">${data.erProduct.toLocaleString()} → сумма: ${data.erSum}</span><div class="result-desc">Норма 26-28. ${data.erSum < 26 ? 'Род не даёт силы.' : data.erSum > 28 ? 'Сильная родовая поддержка.' : 'Норма.'}</div></div>
                 <div class="result-item"><span class="result-label">📊 Срединная линия</span><span class="result-value">${data.midline}</span><div class="result-desc">Среднее арифметическое суммы цифр ЭА, делённое на 7.</div></div>
             </div>`;
 
-            // ----- Изолированные -----
             let isolatedHtml = "";
             if (data.isolated.length > 0) {
                 let warn = `<div class="warning"><strong>⚠️ ВНИМАНИЕ! Изолированные цифры: ${data.isolated.join(', ')}</strong><br>`;
@@ -841,7 +770,6 @@
                 isolatedHtml = warn;
             }
 
-            // ----- Имя -----
             let nameHtml = `<div class="card"><h2>📛 ЧИСЛО И АРКАН ИМЕНИ</h2>
                 <div class="name-number-block"><strong>${firstName}</strong><br>
                 Число имени: ${nameNumber}<br>
@@ -850,26 +778,22 @@
                 </div>
             </div>`;
 
-            // ----- Квадрат Пифагора -----
             let pythCard = `<div class="card"><h2>📐 КВАДРАТ ПИФАГОРА (РОЖДЕНИЕ + ИМЯ)</h2>
                 ${pythHtml}
                 <div class="trait-list"><div class="trait-title">🔢 Трактовки цифр</div>${pythInterpret}</div>
                 ${arrowsHtml}
             </div>`;
 
-            // ----- Родовая карта -----
             let familyCard = `<div class="card"><h2>🌳 РОДОВАЯ КАРТА (ФАМИЛИЯ+ИМЯ+ОТЧЕСТВО)</h2>
                 ${familyHtml}
                 <div class="trait-list"><div class="trait-title">👥 Значение цифр в роду</div>${familyInterpret}</div>
             </div>`;
 
-            // ----- Прогностика -----
             let progCard = `<div class="card"><h2>📅 ПРОГНОСТИКА НА ${targetDate}</h2>
                 ${prognosisHtml}
                 <div style="font-size:0.8rem; color:#7a6856; margin-top:8px;">Число (1–9) и аркан (1–22) показывают энергетику периода.</div>
             </div>`;
 
-            // ----- Сборка -----
             const finalHtml = mainHtml + doubleHtml + derivedHtml + progHtml + energyEA + isolatedHtml + nameHtml + pythCard + familyCard + progCard;
             document.getElementById('resultsArea').innerHTML = finalHtml;
         } catch (e) {
