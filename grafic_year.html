@@ -35,7 +35,7 @@
 </div>
 
 <script>
-// ===== ВЕСЬ ИСХОДНЫЙ JS-КОД ИЗ grafic_year.html =====
+// ===== ПОЛНЫЙ JS-КОД GRAFIC_YEAR =====
 (function() {
     function pad2(n) { return String(n).padStart(2, '0'); }
 
@@ -298,7 +298,14 @@
     }
 
     document.getElementById('calcBtn').addEventListener('click', render);
-    document.getElementById('pdfBtn').addEventListener('click', () => window.print());
+    document.getElementById('pdfBtn').addEventListener('click', function() {
+        var res = document.getElementById('result');
+        if (res.innerHTML.trim() === '' || res.innerHTML.indexOf('⚠️') !== -1) {
+            alert('Сначала выполните расчёт (нажмите "ПОСТРОИТЬ ГРАФИК")');
+            return;
+        }
+        window.print();
+    });
     window.addEventListener('DOMContentLoaded', render);
 })();
 </script>
