@@ -441,10 +441,15 @@
 
     document.getElementById('calcBtn').addEventListener('click', render);
     document.getElementById('pdfBtn').addEventListener('click', function() {
-    setTimeout(function() {
+        var res = document.getElementById('results');
+        if (res.innerHTML.trim() === '' || res.innerHTML.indexOf('⚠️') !== -1) {
+            alert('Сначала выполните расчёт (нажмите "РАССЧИТАТЬ")');
+            return;
+        }
         window.print();
-    }, 300);
-});
+    });
+    window.addEventListener('DOMContentLoaded', render);
+})();
 </script>
 </body>
 </html>
