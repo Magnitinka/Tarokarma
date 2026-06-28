@@ -1,4 +1,4 @@
-/* ===== БАЗОВЫЕ СТИЛИ (кофе с молоком + нежно-голубой) ===== */
+/* ===== ОСНОВНЫЕ СТИЛИ ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,8 +7,8 @@
 
 body {
   font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-  background: #f9f3ec;
-  background-image: radial-gradient(circle at 30% 20%, #fff6ed 0%, #f0e4d8 100%);
+  background: #f7efe6; /* молочный кофе */
+  background-image: radial-gradient(circle at 30% 20%, #fff5eb 0%, #f0e2d4 100%);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -20,10 +20,10 @@ body {
 .container {
   max-width: 1100px;
   width: 100%;
-  background: rgba(255, 250, 245, 0.7);
+  background: rgba(255, 250, 245, 0.8);
   backdrop-filter: blur(8px);
   border-radius: 48px;
-  border: 1px solid rgba(210, 180, 160, 0.3);
+  border: 1px solid rgba(190, 160, 140, 0.3);
   box-shadow: 0 30px 60px rgba(140, 110, 90, 0.15);
   padding: 40px 30px;
   margin: 0 auto;
@@ -33,38 +33,38 @@ body {
 h1 {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #5c4b3a;
+  color: #5c3d2e;
   text-align: center;
   margin-bottom: 0.3em;
   letter-spacing: 2px;
 }
 h1 span {
-  color: #8ab3c9;
+  color: #b88b6b; /* тёплый золотистый */
 }
 h2 {
   font-size: 2rem;
-  color: #5c4b3a;
+  color: #5c3d2e;
   margin: 1em 0 0.5em;
-  border-left: 6px solid #8ab3c9;
+  border-left: 6px solid #b88b6b;
   padding-left: 16px;
 }
 h3 {
   font-size: 1.5rem;
-  color: #5c4b3a;
+  color: #5c3d2e;
   margin: 0.8em 0 0.4em;
 }
 .sub {
   text-align: center;
-  color: #7a6856;
+  color: #8a6e5a;
   font-size: 1.1rem;
-  border-bottom: 1px solid #dac9b8;
+  border-bottom: 1px solid #dccfc4;
   padding-bottom: 12px;
   margin-bottom: 25px;
 }
 
 /* ===== КАРТОЧКИ ===== */
 .card {
-  background: rgba(255, 248, 242, 0.7);
+  background: rgba(255, 248, 242, 0.6);
   backdrop-filter: blur(4px);
   border-radius: 28px;
   padding: 24px 20px;
@@ -81,8 +81,8 @@ a.card {
 a.card:hover {
   transform: translateY(-8px) scale(1.02);
   background: #ffffff;
-  border-color: #8ab3c9;
-  box-shadow: 0 16px 40px rgba(138, 179, 201, 0.2);
+  border-color: #b88b6b;
+  box-shadow: 0 16px 40px rgba(184, 139, 107, 0.2);
 }
 
 /* ===== ПОЛЯ ВВОДА ===== */
@@ -94,7 +94,7 @@ a.card:hover {
 }
 label {
   font-weight: 600;
-  color: #5c4b3a;
+  color: #5c3d2e;
   font-size: 0.95rem;
 }
 input,
@@ -114,62 +114,59 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #8ab3c9;
-  box-shadow: 0 0 0 3px rgba(138, 179, 201, 0.2);
+  border-color: #b88b6b;
+  box-shadow: 0 0 0 3px rgba(184, 139, 107, 0.2);
 }
 input[type="date"] {
   -webkit-appearance: none;
   appearance: none;
 }
 
-/* ===== КНОПКИ ===== */
+/* ===== КНОПКИ (яркие) ===== */
 .btn,
 button,
 input[type="submit"],
 input[type="reset"] {
-  background: rgba(255, 248, 242, 0.8);
-  border: 1px solid #dccfc4;
+  background: linear-gradient(135deg, #d9b08c, #c4906a);
+  border: none;
   border-radius: 40px;
   padding: 14px 28px;
   font-size: 1.1rem;
-  font-weight: 600;
-  color: #5c4b3a;
+  font-weight: 700;
+  color: #fff;
   cursor: pointer;
   transition: 0.3s;
-  backdrop-filter: blur(4px);
   font-family: inherit;
   display: inline-block;
   text-align: center;
   min-width: 140px;
+  box-shadow: 0 6px 16px rgba(184, 139, 107, 0.3);
 }
 .btn:hover,
 button:hover {
-  background: #ffffff;
-  border-color: #8ab3c9;
-  box-shadow: 0 8px 20px rgba(138, 179, 201, 0.2);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #c4906a, #b07850);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(184, 139, 107, 0.4);
 }
 .btn:active,
 button:active {
   transform: scale(0.97);
 }
 .btn-primary {
-  background: #8ab3c9;
-  border-color: #8ab3c9;
-  color: #fff;
+  background: linear-gradient(135deg, #aac9d9, #89b3c9);
+  box-shadow: 0 6px 16px rgba(137, 179, 201, 0.3);
 }
 .btn-primary:hover {
-  background: #6f9bb3;
-  border-color: #6f9bb3;
+  background: linear-gradient(135deg, #89b3c9, #6f9bb3);
+  box-shadow: 0 10px 24px rgba(137, 179, 201, 0.4);
 }
 .btn-pdf {
-  background: #5c4b3a;
-  border-color: #5c4b3a;
-  color: #fff;
+  background: linear-gradient(135deg, #7a6a5a, #5c4b3a);
+  box-shadow: 0 6px 16px rgba(92, 75, 58, 0.3);
 }
 .btn-pdf:hover {
-  background: #3f3226;
-  border-color: #3f3226;
+  background: linear-gradient(135deg, #5c4b3a, #3f3226);
+  box-shadow: 0 10px 24px rgba(92, 75, 58, 0.4);
 }
 
 /* ===== ТАБЛИЦЫ ===== */
@@ -186,11 +183,11 @@ table {
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(140, 110, 90, 0.08);
   font-size: 0.9rem;
-  min-width: 600px; /* чтобы не сжимались слишком сильно, но на мобильных будет скролл */
+  min-width: 600px;
 }
 th {
-  background: rgba(138, 179, 201, 0.2);
-  color: #4d6a7a;
+  background: rgba(184, 139, 107, 0.2);
+  color: #5c3d2e;
   font-weight: 600;
   padding: 12px 15px;
   text-align: left;
@@ -204,7 +201,7 @@ tr:last-child td {
   border-bottom: none;
 }
 tr:hover {
-  background: rgba(138, 179, 201, 0.05);
+  background: rgba(184, 139, 107, 0.05);
 }
 .karmic-row {
   background-color: #f8e8e0 !important;
@@ -231,7 +228,7 @@ li {
   border-radius: 20px;
   padding: 18px 16px;
   margin: 12px 0;
-  border-left: 4px solid #8ab3c9;
+  border-left: 4px solid #b88b6b;
 }
 .result-item {
   display: flex;
@@ -242,7 +239,7 @@ li {
 }
 .result-label {
   font-weight: 600;
-  color: #5c4b3a;
+  color: #5c3d2e;
   min-width: 180px;
   flex: 1 1 40%;
 }
@@ -303,7 +300,7 @@ li {
   text-align: center;
   padding: 12px 6px;
   font-weight: 700;
-  color: #5c4b3a;
+  color: #5c3d2e;
   border: 2px solid #dccfc4;
   font-size: 1.2rem;
 }
@@ -324,9 +321,9 @@ li {
   margin-bottom: 14px;
 }
 .trait-title {
-  color: #5c4b3a;
+  color: #5c3d2e;
   font-weight: bold;
-  border-left: 4px solid #8ab3c9;
+  border-left: 4px solid #b88b6b;
   padding-left: 10px;
   margin-bottom: 10px;
 }
@@ -337,7 +334,7 @@ li {
   border-radius: 30px;
   font-size: 0.75rem;
   margin: 4px 5px 4px 0;
-  color: #5c4b3a;
+  color: #5c3d2e;
   border: 1px solid #dccfc4;
 }
 .name-number-block {
@@ -352,18 +349,18 @@ li {
 }
 .name-number-block span {
   font-weight: bold;
-  color: #8ab3c9;
+  color: #b88b6b;
 }
 .double-da-block {
-  background: rgba(138, 179, 201, 0.1);
-  border-left: 4px solid #8ab3c9;
+  background: rgba(184, 139, 107, 0.1);
+  border-left: 4px solid #b88b6b;
   padding: 12px 16px;
   margin: 12px 0;
   border-radius: 16px;
 }
 .double-da-title {
   font-weight: bold;
-  color: #5c4b3a;
+  color: #5c3d2e;
 }
 
 /* ===== ГРАФИКИ (CANVAS) ===== */
@@ -440,8 +437,8 @@ canvas {
 }
 .card-item:hover {
   transform: translateY(-5px);
-  border-color: #8ab3c9;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  border-color: #b88b6b;
+  box-shadow: 0 8px 20px rgba(184, 139, 107, 0.2);
 }
 .card-item img {
   width: 100%;
@@ -458,7 +455,7 @@ canvas {
 .card-item .card-name {
   font-weight: 600;
   font-size: 0.85rem;
-  color: #5c4b3a;
+  color: #5c3d2e;
   line-height: 1.2;
 }
 
@@ -497,7 +494,7 @@ canvas {
   cursor: pointer;
   background: none;
   border: none;
-  color: #5c4b3a;
+  color: #5c3d2e;
 }
 .modal-content img {
   max-width: 180px;
@@ -537,7 +534,7 @@ canvas {
 }
 .result-card h3 {
   font-size: 1.6rem;
-  color: #5c4b3a;
+  color: #5c3d2e;
 }
 .result-card .desc {
   max-width: 700px;
@@ -562,27 +559,28 @@ canvas {
 }
 .footer .course {
   display: inline-block;
-  background: rgba(138, 179, 201, 0.15);
+  background: rgba(184, 139, 107, 0.15);
   padding: 4px 18px;
   border-radius: 30px;
-  color: #4d6a7a;
+  color: #7a5a4a;
   font-weight: 500;
 }
 .footer a {
-  color: #8ab3c9;
+  color: #b88b6b;
   text-decoration: none;
-  border-bottom: 1px dashed #8ab3c9;
+  border-bottom: 1px dashed #b88b6b;
 }
 .footer a:hover {
-  color: #5c8aa0;
+  color: #8a6e5a;
 }
 .footer .paid-note {
   font-size: 0.85rem;
-  background: rgba(255, 215, 200, 0.2);
+  background: rgba(184, 139, 107, 0.1);
   padding: 5px 15px;
   border-radius: 20px;
   display: inline-block;
   margin: 5px 0 10px;
+  color: #7a5a4a;
 }
 
 /* ===== НАВИГАЦИЯ НАЗАД ===== */
@@ -590,16 +588,17 @@ canvas {
   display: inline-block;
   margin: 10px 0 20px;
   padding: 8px 20px;
-  background: #8ab3c9;
+  background: linear-gradient(135deg, #aac9d9, #89b3c9);
   color: #fff;
   border-radius: 40px;
   text-decoration: none;
   font-weight: 500;
   transition: 0.2s;
   border: none;
+  box-shadow: 0 4px 10px rgba(137, 179, 201, 0.3);
 }
 .back-link:hover {
-  background: #6f9bb3;
+  background: linear-gradient(135deg, #89b3c9, #6f9bb3);
   transform: translateX(-4px);
 }
 
@@ -736,7 +735,7 @@ canvas {
     padding: 6px;
   }
   .double-da-block {
-    border-left: 2px solid #8ab3c9;
+    border-left: 2px solid #b88b6b;
   }
   .trait-list {
     background: #f9f9f9;
@@ -757,19 +756,15 @@ canvas {
   .modal {
     display: none !important;
   }
-  /* Убираем фоновые изображения */
   * {
     background-image: none !important;
   }
-  /* Чтобы графики не обрезались */
   .chart-container {
     page-break-inside: avoid;
   }
-  /* Скрываем всё, что может мешать */
   .print-only {
     display: block !important;
   }
-  /* Убираем лишние отступы */
   .container {
     padding: 0.1in !important;
   }
