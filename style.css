@@ -897,3 +897,29 @@ canvas {
 .btn-pdf {
   display: none !important;
 }
+/* ===== ФОН С КАРТИНКОЙ С КОМПЬЮТЕРА ===== */
+body {
+  background-image: url('cosmos.jpg');  /* замените на имя вашего файла */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Затемняющий слой, чтобы текст читался */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 27, 42, 0.5); /* можно менять прозрачность */
+  z-index: -1;
+}
+
+/* Контейнер – светлый, чтобы выделяться на фоне */
+.container {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(6px);
+}
