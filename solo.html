@@ -51,7 +51,7 @@
 </div>
 
 <script>
-// ===== ПОЛНЫЙ JS-КОД SOLO (ВЕСЬ, С РАСЧЁТАМИ) =====
+// ===== ПОЛНЫЙ JS-КОД SOLO =====
 (function() {
     function toArcane(num) {
         if (num === 0) return 22;
@@ -804,14 +804,14 @@
     }
 
     document.getElementById('calculateBtn').addEventListener('click', render);
+
+    // ===== PDF ОБРАБОТЧИК (БЕЗ ПРОВЕРОК) =====
     document.getElementById('pdfBtn').addEventListener('click', function() {
-        var res = document.getElementById('resultsArea');
-        if (res.innerHTML.trim() === '' || res.innerHTML.indexOf('⚠️') !== -1) {
-            alert('Сначала выполните расчёт (нажмите "РАССЧИТАТЬ")');
-            return;
-        }
-        window.print();
+        setTimeout(function() {
+            window.print();
+        }, 300);
     });
+
     window.addEventListener('DOMContentLoaded', render);
 })();
 </script>
