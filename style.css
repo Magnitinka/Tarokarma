@@ -1,14 +1,117 @@
-/* ===== БАЗОВЫЕ СТИЛИ (кофе с молоком + нежно-голубой) ===== */
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+:root {
+  /* ===== ФОНЫ ===== */
+  --bg-body: #0d1b2a;
+  --bg-body-gradient: radial-gradient(circle at 30% 20%, #1a0f2e 0%, #0a0612 100%);
+  --bg-container: rgba(13, 27, 42, 0.85);
+  --bg-card: rgba(26, 15, 46, 0.7);
+  --bg-card-hover: rgba(40, 25, 60, 0.9);
+  --bg-input: rgba(26, 15, 46, 0.6);
+  --bg-cell: rgba(26, 15, 46, 0.5);
+  --bg-missing: rgba(92, 26, 26, 0.2);
+  --bg-trait: rgba(26, 15, 46, 0.5);
+  --bg-name-block: rgba(26, 15, 46, 0.5);
+  --bg-double-da: rgba(212, 175, 55, 0.1);
+  --bg-warning: rgba(92, 26, 26, 0.2);
+  --bg-zero: rgba(92, 26, 26, 0.3);
+  --bg-karmic-row: rgba(212, 175, 55, 0.15);
+  --bg-unsolved: rgba(212, 175, 55, 0.1);
+  --bg-modal: #1a0f2e;
+  --bg-modal-desc: rgba(26, 15, 46, 0.5);
+  --bg-result-card: rgba(26, 15, 46, 0.7);
+  --bg-result-desc: rgba(26, 15, 46, 0.4);
+  --bg-legend: rgba(26, 15, 46, 0.5);
+  --bg-stats: rgba(26, 15, 46, 0.5);
+  --bg-footer-course: rgba(212, 175, 55, 0.15);
+  --bg-paid-note: rgba(212, 175, 55, 0.1);
+  --bg-back-link: #d4af37;
+  --bg-back-link-hover: #b8952a;
+
+  /* ===== ТЕКСТ ===== */
+  --text-primary: #f0e6d0;
+  --text-secondary: #b8c8d8;
+  --text-muted: #8a9aaa;
+  --text-light: #ffffff;
+  --text-subtitle: #b8c8d8;
+  --text-desc: #a8b5c4;
+  --text-footer: #8a9aaa;
+  --text-footer-course: #d4af37;
+  --text-link: #d4af37;
+  --text-link-hover: #f0d080;
+  --text-warning: #f0d0c0;
+  --text-warning-strong: #e08060;
+  --text-zero: #f0d0c0;
+  --text-cell: #f0e6d0;
+  --text-cell-missing: #a8b5c4;
+  --text-trait-title: #f0e6d0;
+  --text-badge: #f0e6d0;
+  --text-name-number: #d4af37;
+  --text-double-da: #d4af37;
+  --text-stats: #b8c8d8;
+  --text-legend: #b8c8d8;
+  --text-card-item: #f0e6d0;
+  --text-card-item-number: #8a9aaa;
+  --text-card-item-name: #f0e6d0;
+  --text-modal-title: #f0e6d0;
+
+  /* ===== АКЦЕНТЫ ===== */
+  --accent: #d4af37;               /* золотой – главный акцент */
+  --accent-light: #f0d080;
+  --accent-dark: #b8952a;
+  --accent-secondary: #5c1a1a;     /* бордо – благородный */
+
+  /* ===== ГРАНИЦЫ ===== */
+  --border-color: rgba(212, 175, 55, 0.3);
+  --border-light: rgba(212, 175, 55, 0.15);
+  --border-input: rgba(212, 175, 55, 0.3);
+  --border-input-focus: #d4af37;
+  --border-cell: rgba(212, 175, 55, 0.3);
+  --border-cell-missing: rgba(92, 26, 26, 0.3);
+  --border-badge: rgba(212, 175, 55, 0.2);
+  --border-name-block: rgba(212, 175, 55, 0.2);
+  --border-modal: rgba(212, 175, 55, 0.2);
+  --border-result-card: rgba(212, 175, 55, 0.2);
+
+  /* ===== КНОПКИ ===== */
+  --btn-bg: linear-gradient(135deg, #d4af37, #b8952a);          /* золото */
+  --btn-bg-hover: linear-gradient(135deg, #e8c84a, #c9a832);
+  --btn-text: #1a0f2e;
+  --btn-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  --btn-shadow-hover: 0 8px 25px rgba(212, 175, 55, 0.5);
+
+  --btn-primary-bg: linear-gradient(135deg, #5c1a1a, #3a0a0a); /* бордо */
+  --btn-primary-hover: linear-gradient(135deg, #7a2828, #5c1a1a);
+  --btn-primary-shadow: 0 4px 15px rgba(92, 26, 26, 0.4);
+  --btn-primary-shadow-hover: 0 8px 25px rgba(92, 26, 26, 0.5);
+
+  --btn-pdf-bg: linear-gradient(135deg, #1a5c3a, #0a3a20);    /* изумруд (для PDF) */
+  --btn-pdf-hover: linear-gradient(135deg, #2a7a50, #1a5c3a);
+  --btn-pdf-shadow: 0 4px 15px rgba(26, 92, 58, 0.4);
+  --btn-pdf-shadow-hover: 0 8px 25px rgba(26, 92, 58, 0.5);
+
+  /* ===== ТЕНИ ===== */
+  --shadow-card: 0 6px 18px rgba(0,0,0,0.6);
+  --shadow-hover: 0 16px 40px rgba(212, 175, 55, 0.15);
+  --shadow-container: 0 30px 60px rgba(0,0,0,0.6);
+  --shadow-table: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-result: 0 4px 10px rgba(0,0,0,0.4);
+  --shadow-chart: 0 4px 12px rgba(0,0,0,0.2);
+  --shadow-modal: 0 30px 60px rgba(0,0,0,0.6);
+
+  /* ===== ШРИФТЫ ===== */
+  --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
 body {
-  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-  background: #f9f3ec;
-  background-image: radial-gradient(circle at 30% 20%, #fff6ed 0%, #f0e4d8 100%);
+  font-family: var(--font-family);
+  background: var(--bg-body);
+  background-image: var(--bg-body-gradient);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -20,11 +123,11 @@ body {
 .container {
   max-width: 1100px;
   width: 100%;
-  background: rgba(255, 250, 245, 0.7);
+  background: var(--bg-container);
   backdrop-filter: blur(8px);
   border-radius: 48px;
-  border: 1px solid rgba(210, 180, 160, 0.3);
-  box-shadow: 0 30px 60px rgba(140, 110, 90, 0.15);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-container);
   padding: 40px 30px;
   margin: 0 auto;
 }
@@ -33,56 +136,56 @@ body {
 h1 {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #5c4b3a;
+  color: var(--text-primary);
   text-align: center;
   margin-bottom: 0.3em;
   letter-spacing: 2px;
 }
 h1 span {
-  color: #8ab3c9;
+  color: var(--accent);
 }
 h2 {
   font-size: 2rem;
-  color: #5c4b3a;
+  color: var(--text-primary);
   margin: 1em 0 0.5em;
-  border-left: 6px solid #8ab3c9;
+  border-left: 6px solid var(--accent);
   padding-left: 16px;
 }
 h3 {
   font-size: 1.5rem;
-  color: #5c4b3a;
+  color: var(--text-primary);
   margin: 0.8em 0 0.4em;
 }
 .sub {
   text-align: center;
-  color: #7a6856;
+  color: var(--text-subtitle);
   font-size: 1.1rem;
-  border-bottom: 1px solid #dac9b8;
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 12px;
   margin-bottom: 25px;
 }
 
 /* ===== КАРТОЧКИ ===== */
 .card {
-  background: rgba(255, 248, 242, 0.7);
+  background: var(--bg-card);
   backdrop-filter: blur(4px);
   border-radius: 28px;
   padding: 24px 20px;
-  border: 1px solid #dccfc4;
-  box-shadow: 0 6px 18px rgba(160, 130, 110, 0.08);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
   margin: 20px 0;
 }
 a.card {
   text-decoration: none;
-  color: #4d3e30;
+  color: var(--text-secondary);
   display: block;
   transition: 0.3s;
 }
 a.card:hover {
   transform: translateY(-8px) scale(1.02);
-  background: #ffffff;
-  border-color: #8ab3c9;
-  box-shadow: 0 16px 40px rgba(138, 179, 201, 0.2);
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
 }
 
 /* ===== ПОЛЯ ВВОДА ===== */
@@ -94,7 +197,7 @@ a.card:hover {
 }
 label {
   font-weight: 600;
-  color: #5c4b3a;
+  color: var(--text-primary);
   font-size: 0.95rem;
 }
 input,
@@ -103,10 +206,10 @@ textarea {
   width: 100%;
   padding: 14px 18px;
   font-size: 1rem;
-  background: rgba(255, 248, 242, 0.6);
-  border: 2px solid #dccfc4;
+  background: var(--bg-input);
+  border: 2px solid var(--border-input);
   border-radius: 40px;
-  color: #4d3e30;
+  color: var(--text-secondary);
   transition: 0.2s;
   font-family: inherit;
 }
@@ -114,60 +217,60 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: #8ab3c9;
-  box-shadow: 0 0 0 3px rgba(138, 179, 201, 0.2);
+  border-color: var(--border-input-focus);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
 }
 input[type="date"] {
   -webkit-appearance: none;
   appearance: none;
 }
 
-/* ===== КНОПКИ (ЯРКИЕ, СОЧНЫЕ) ===== */
+/* ===== КНОПКИ ===== */
 .btn,
 button,
 input[type="submit"],
 input[type="reset"] {
-  background: linear-gradient(135deg, #d4a373, #c9956b);
+  background: var(--btn-bg);
   border: none;
   border-radius: 40px;
   padding: 14px 28px;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--btn-text);
   cursor: pointer;
   transition: 0.3s;
   font-family: inherit;
   display: inline-block;
   text-align: center;
   min-width: 140px;
-  box-shadow: 0 4px 15px rgba(201, 149, 107, 0.4);
+  box-shadow: var(--btn-shadow);
   text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 .btn:hover,
 button:hover {
-  background: linear-gradient(135deg, #e0b48c, #d4a373);
+  background: var(--btn-bg-hover);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 25px rgba(201, 149, 107, 0.5);
+  box-shadow: var(--btn-shadow-hover);
 }
 .btn:active,
 button:active {
   transform: scale(0.97);
 }
 .btn-primary {
-  background: linear-gradient(135deg, #8ab3c9, #6f9bb3);
-  box-shadow: 0 4px 15px rgba(106, 155, 179, 0.4);
+  background: var(--btn-primary-bg);
+  box-shadow: var(--btn-primary-shadow);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, #9fc4d8, #8ab3c9);
-  box-shadow: 0 8px 25px rgba(106, 155, 179, 0.5);
+  background: var(--btn-primary-hover);
+  box-shadow: var(--btn-primary-shadow-hover);
 }
 .btn-pdf {
-  background: linear-gradient(135deg, #5c4b3a, #3f3226);
-  box-shadow: 0 4px 15px rgba(92, 75, 58, 0.4);
+  background: var(--btn-pdf-bg);
+  box-shadow: var(--btn-pdf-shadow);
 }
 .btn-pdf:hover {
-  background: linear-gradient(135deg, #7a6250, #5c4b3a);
-  box-shadow: 0 8px 25px rgba(92, 75, 58, 0.5);
+  background: var(--btn-pdf-hover);
+  box-shadow: var(--btn-pdf-shadow-hover);
 }
 
 /* ===== ТАБЛИЦЫ ===== */
@@ -179,44 +282,45 @@ button:active {
 table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(255, 248, 242, 0.4);
+  background: rgba(26, 15, 46, 0.4);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(140, 110, 90, 0.08);
+  box-shadow: var(--shadow-table);
   font-size: 0.9rem;
   min-width: 600px;
 }
 th {
-  background: rgba(138, 179, 201, 0.2);
-  color: #4d6a7a;
+  background: rgba(92, 26, 26, 0.3);
+  color: #f0e6d0;
   font-weight: 600;
   padding: 12px 15px;
   text-align: left;
 }
 td {
   padding: 10px 15px;
-  border-bottom: 1px solid #e6dbd0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
   word-break: break-word;
+  color: var(--text-secondary);
 }
 tr:last-child td {
   border-bottom: none;
 }
 tr:hover {
-  background: rgba(138, 179, 201, 0.05);
+  background: rgba(212, 175, 55, 0.05);
 }
 .karmic-row {
-  background-color: #f8e8e0 !important;
+  background-color: var(--bg-karmic-row) !important;
   font-weight: 600;
 }
 .highlight-unsolved {
-  background-color: #fcf3d9 !important;
+  background-color: var(--bg-unsolved) !important;
   font-weight: 600;
 }
 
 /* ===== СПИСКИ ===== */
 ul, ol {
   padding-left: 25px;
-  color: #4d3e30;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 li {
@@ -225,29 +329,29 @@ li {
 
 /* ===== БЛОКИ РЕЗУЛЬТАТОВ ===== */
 .result-block {
-  background: rgba(255, 248, 242, 0.5);
+  background: rgba(26, 15, 46, 0.4);
   border-radius: 20px;
   padding: 18px 16px;
   margin: 12px 0;
-  border-left: 4px solid #8ab3c9;
+  border-left: 4px solid var(--accent);
 }
 .result-item {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   padding: 8px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 }
 .result-label {
   font-weight: 600;
-  color: #5c4b3a;
+  color: var(--text-primary);
   min-width: 180px;
   flex: 1 1 40%;
 }
 .result-value {
   font-weight: 500;
-  color: #4d3e30;
-  background: rgba(255,255,255,0.5);
+  color: var(--text-secondary);
+  background: rgba(26, 15, 46, 0.4);
   padding: 4px 12px;
   border-radius: 30px;
   flex: 1 1 auto;
@@ -256,27 +360,27 @@ li {
 .result-desc {
   width: 100%;
   font-size: 0.85rem;
-  color: #7a6856;
+  color: var(--text-desc);
   margin-top: 4px;
   padding-left: 10px;
 }
 
 /* ===== ПРЕДУПРЕЖДЕНИЯ ===== */
 .warning {
-  background: #fcf0e8;
+  background: var(--bg-warning);
   border-left: 4px solid #c0392b;
   padding: 12px 16px;
   border-radius: 12px;
   margin: 12px 0;
   font-weight: 500;
-  color: #5c3a32;
+  color: var(--text-warning);
 }
 .warning strong {
-  color: #a93226;
+  color: var(--text-warning-strong);
 }
 .zero-highlight {
-  background: #f8d7da;
-  color: #721c24;
+  background: var(--bg-zero);
+  color: var(--text-zero);
   font-weight: 700;
   padding: 0 8px;
   border-radius: 6px;
@@ -296,89 +400,89 @@ li {
   width: 100%;
 }
 .cell {
-  background: rgba(255, 248, 242, 0.7);
+  background: var(--bg-cell);
   border-radius: 18px;
   text-align: center;
   padding: 12px 6px;
   font-weight: 700;
-  color: #5c4b3a;
-  border: 2px solid #dccfc4;
+  color: var(--text-cell);
+  border: 2px solid var(--border-cell);
   font-size: 1.2rem;
 }
 .cell span {
   font-size: 0.7rem;
-  color: #8a7a6a;
+  color: var(--text-muted);
   display: block;
 }
 .cell.missing {
-  background: #f0d8d0;
-  border-color: #b39a8a;
-  color: #7a5a4a;
+  background: var(--bg-missing);
+  border-color: var(--border-cell-missing);
+  color: var(--text-cell-missing);
 }
 .trait-list {
-  background: rgba(255, 248, 242, 0.5);
+  background: var(--bg-trait);
   border-radius: 20px;
   padding: 12px 14px;
   margin-bottom: 14px;
 }
 .trait-title {
-  color: #5c4b3a;
+  color: var(--text-trait-title);
   font-weight: bold;
-  border-left: 4px solid #8ab3c9;
+  border-left: 4px solid var(--accent);
   padding-left: 10px;
   margin-bottom: 10px;
 }
 .badge {
   display: inline-block;
-  background: rgba(255, 248, 242, 0.6);
+  background: rgba(26, 15, 46, 0.6);
   padding: 4px 12px;
   border-radius: 30px;
   font-size: 0.75rem;
   margin: 4px 5px 4px 0;
-  color: #5c4b3a;
-  border: 1px solid #dccfc4;
+  color: var(--text-badge);
+  border: 1px solid var(--border-badge);
 }
 .name-number-block {
-  background: rgba(255, 248, 242, 0.6);
+  background: var(--bg-name-block);
   border-radius: 24px;
   padding: 14px;
   margin-bottom: 18px;
   text-align: center;
   font-size: 1rem;
   line-height: 1.5;
-  border: 1px solid #dccfc4;
+  border: 1px solid var(--border-name-block);
 }
 .name-number-block span {
   font-weight: bold;
-  color: #8ab3c9;
+  color: var(--text-name-number);
 }
 .double-da-block {
-  background: rgba(138, 179, 201, 0.1);
-  border-left: 4px solid #8ab3c9;
+  background: var(--bg-double-da);
+  border-left: 4px solid var(--accent);
   padding: 12px 16px;
   margin: 12px 0;
   border-radius: 16px;
 }
 .double-da-title {
   font-weight: bold;
-  color: #5c4b3a;
+  color: var(--text-double-da);
 }
 
 /* ===== ГРАФИКИ (CANVAS) ===== */
 .chart-container {
   width: 100%;
   margin: 10px auto;
-  background: #ffffff;
+  background: #0d1b2a;
   border-radius: 16px;
   padding: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  box-shadow: var(--shadow-chart);
 }
 canvas {
   width: 100% !important;
   height: auto !important;
   display: block;
   border-radius: 12px;
-  background: #ffffff;
+  background: #0d1b2a;
 }
 .legend {
   display: flex;
@@ -387,7 +491,7 @@ canvas {
   gap: 20px;
   font-size: 0.85rem;
   margin: 8px 0;
-  color: #4d3e30;
+  color: var(--text-legend);
 }
 .legend-item {
   display: flex;
@@ -399,10 +503,10 @@ canvas {
   height: 4px;
   border-radius: 4px;
 }
-.legend-color.man { background: #2c3e50; }
-.legend-color.woman { background: #e74c3c; }
-.legend-color.ea { background: #2c3e50; }
-.legend-color.er { background: #e74c3c; }
+.legend-color.man { background: #a8b5c4; }   /* серебро */
+.legend-color.woman { background: #5c1a1a; } /* бордо */
+.legend-color.ea { background: #d4af37; }    /* золото */
+.legend-color.er { background: #5c1a1a; }    /* бордо */
 
 .stats {
   display: flex;
@@ -413,10 +517,11 @@ canvas {
   font-size: 0.9rem;
 }
 .stats span {
-  background: rgba(255, 248, 242, 0.6);
+  background: var(--bg-stats);
   padding: 4px 14px;
   border-radius: 30px;
-  border: 1px solid #dccfc4;
+  border: 1px solid var(--border-color);
+  color: var(--text-stats);
 }
 
 /* ===== ГАЛЕРЕЯ АРКАНОВ (для lifearcan) ===== */
@@ -427,19 +532,19 @@ canvas {
   margin-top: 10px;
 }
 .card-item {
-  background: rgba(255, 248, 242, 0.7);
+  background: var(--bg-card);
   border-radius: 16px;
   padding: 10px 5px;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   transition: 0.3s;
   border: 2px solid transparent;
 }
 .card-item:hover {
   transform: translateY(-5px);
-  border-color: #8ab3c9;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 .card-item img {
   width: 100%;
@@ -450,13 +555,13 @@ canvas {
 .card-item .card-number {
   display: block;
   font-size: 0.75rem;
-  color: #8a7a6a;
+  color: var(--text-card-item-number);
   margin-top: 4px;
 }
 .card-item .card-name {
   font-weight: 600;
   font-size: 0.85rem;
-  color: #5c4b3a;
+  color: var(--text-card-item-name);
   line-height: 1.2;
 }
 
@@ -468,7 +573,7 @@ canvas {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.7);
   backdrop-filter: blur(4px);
   justify-content: center;
   align-items: center;
@@ -477,14 +582,14 @@ canvas {
 }
 .modal.active { display: flex; }
 .modal-content {
-  background: #fffbf7;
+  background: var(--bg-modal);
   border-radius: 32px;
   max-width: 600px;
   width: 100%;
   padding: 30px 25px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  box-shadow: var(--shadow-modal);
   position: relative;
 }
 .modal-close {
@@ -495,88 +600,90 @@ canvas {
   cursor: pointer;
   background: none;
   border: none;
-  color: #5c4b3a;
+  color: var(--text-primary);
 }
 .modal-content img {
   max-width: 180px;
   display: block;
   margin: 0 auto 15px;
   border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-result);
 }
 .modal-content h2 {
   text-align: center;
   margin-bottom: 10px;
 }
 .modal-desc {
-  background: rgba(255, 248, 242, 0.6);
+  background: var(--bg-modal-desc);
   padding: 16px;
   border-radius: 16px;
   font-size: 0.92rem;
   line-height: 1.6;
+  color: var(--text-secondary);
 }
 
 /* ===== РЕЗУЛЬТАТ КАРТЫ (lifearcan) ===== */
 .result-card {
   display: none;
   margin-top: 25px;
-  background: rgba(255, 248, 242, 0.7);
+  background: var(--bg-result-card);
   padding: 20px;
   border-radius: 28px;
-  border: 1px solid #dccfc4;
+  border: 1px solid var(--border-result-card);
   text-align: center;
 }
 .result-card.active { display: block; }
 .result-card img {
   max-width: 180px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-result);
   margin: 10px 0;
 }
 .result-card h3 {
   font-size: 1.6rem;
-  color: #5c4b3a;
+  color: var(--text-primary);
 }
 .result-card .desc {
   max-width: 700px;
   margin: 10px auto;
   text-align: left;
-  background: rgba(255, 248, 242, 0.5);
+  background: var(--bg-result-desc);
   padding: 15px 18px;
   border-radius: 12px;
   line-height: 1.6;
   font-size: 0.95rem;
+  color: var(--text-secondary);
 }
 
 /* ===== ФУТЕР ===== */
 .footer {
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 1px solid #dccfc4;
+  border-top: 1px solid var(--border-color);
   text-align: center;
-  color: #9b8a7a;
+  color: var(--text-footer);
   font-size: 0.85rem;
   line-height: 1.6;
 }
 .footer .course {
   display: inline-block;
-  background: rgba(138, 179, 201, 0.15);
+  background: var(--bg-footer-course);
   padding: 4px 18px;
   border-radius: 30px;
-  color: #4d6a7a;
+  color: var(--text-footer-course);
   font-weight: 500;
 }
 .footer a {
-  color: #8ab3c9;
+  color: var(--text-link);
   text-decoration: none;
-  border-bottom: 1px dashed #8ab3c9;
+  border-bottom: 1px dashed var(--text-link);
 }
 .footer a:hover {
-  color: #5c8aa0;
+  color: var(--text-link-hover);
 }
 .footer .paid-note {
   font-size: 0.85rem;
-  background: rgba(255, 215, 200, 0.2);
+  background: var(--bg-paid-note);
   padding: 5px 15px;
   border-radius: 20px;
   display: inline-block;
@@ -588,8 +695,8 @@ canvas {
   display: inline-block;
   margin: 10px 0 20px;
   padding: 8px 20px;
-  background: #8ab3c9;
-  color: #fff;
+  background: var(--bg-back-link);
+  color: #1a0f2e;
   border-radius: 40px;
   text-decoration: none;
   font-weight: 500;
@@ -597,7 +704,7 @@ canvas {
   border: none;
 }
 .back-link:hover {
-  background: #6f9bb3;
+  background: var(--bg-back-link-hover);
   transform: translateX(-4px);
 }
 
@@ -734,7 +841,7 @@ canvas {
     padding: 6px;
   }
   .double-da-block {
-    border-left: 2px solid #8ab3c9;
+    border-left: 2px solid var(--accent);
   }
   .trait-list {
     background: #f9f9f9;
@@ -768,6 +875,8 @@ canvas {
     padding: 0.1in !important;
   }
 }
-#pdfBtn {
-    display: none !important;
+
+/* ===== СКРЫТЬ КНОПКИ PDF (если они всё ещё нужны) ===== */
+.btn-pdf {
+  display: none !important;
 }
