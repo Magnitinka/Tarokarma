@@ -805,15 +805,11 @@
 
     document.getElementById('calculateBtn').addEventListener('click', render);
     document.getElementById('pdfBtn').addEventListener('click', function() {
-        var res = document.getElementById('resultsArea');
-        if (res.innerHTML.trim() === '' || res.innerHTML.indexOf('⚠️') !== -1) {
-            alert('Сначала выполните расчёт (нажмите "РАССЧИТАТЬ")');
-            return;
-        }
+    // Даём браузеру время на рендеринг, затем печатаем
+    setTimeout(function() {
         window.print();
-    });
-    window.addEventListener('DOMContentLoaded', render);
-})();
+    }, 300);
+});
 </script>
 </body>
 </html>
