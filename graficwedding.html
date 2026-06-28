@@ -10,7 +10,7 @@
 <div class="container">
   <a href="index.html" class="back-link">← Назад в меню</a>
   <h1>📈 График вступления в отношения</h1>
-  <p class="sub">График готовности к браку по дате рождения</p>
+  <p class="sub">Индивидуальный прогноз готовности к браку по дате рождения</p>
 
   <div class="card">
     <div class="input-group">
@@ -35,7 +35,7 @@
 </div>
 
 <script>
-// ===== ВЕСЬ ИСХОДНЫЙ JS-КОД ИЗ graficwedding.html (БЕЗ ИЗМЕНЕНИЙ) =====
+// ===== ПОЛНЫЙ JS-КОД GRAFICWEDDING =====
 (function() {
     function pad2(n) { return String(n).padStart(2, '0'); }
 
@@ -303,7 +303,14 @@
     }
 
     document.getElementById('calcBtn').addEventListener('click', render);
-    document.getElementById('pdfBtn').addEventListener('click', () => window.print());
+    document.getElementById('pdfBtn').addEventListener('click', function() {
+        var res = document.getElementById('result');
+        if (res.innerHTML.trim() === '' || res.innerHTML.indexOf('⚠️') !== -1) {
+            alert('Сначала выполните расчёт (нажмите "ПОСТРОИТЬ ГРАФИК")');
+            return;
+        }
+        window.print();
+    });
     window.addEventListener('DOMContentLoaded', render);
 })();
 </script>
