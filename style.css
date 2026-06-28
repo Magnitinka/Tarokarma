@@ -72,6 +72,18 @@ h3 {
   box-shadow: 0 6px 18px rgba(160, 130, 110, 0.08);
   margin: 20px 0;
 }
+a.card {
+  text-decoration: none;
+  color: #4d3e30;
+  display: block;
+  transition: 0.3s;
+}
+a.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: #ffffff;
+  border-color: #8ab3c9;
+  box-shadow: 0 16px 40px rgba(138, 179, 201, 0.2);
+}
 
 /* ===== ПОЛЯ ВВОДА ===== */
 .input-group {
@@ -164,6 +176,7 @@ button:active {
 .table-wrap {
   overflow-x: auto;
   margin: 15px 0;
+  -webkit-overflow-scrolling: touch;
 }
 table {
   width: 100%;
@@ -173,6 +186,7 @@ table {
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(140, 110, 90, 0.08);
   font-size: 0.9rem;
+  min-width: 600px; /* чтобы не сжимались слишком сильно, но на мобильных будет скролл */
 }
 th {
   background: rgba(138, 179, 201, 0.2);
@@ -184,6 +198,7 @@ th {
 td {
   padding: 10px 15px;
   border-bottom: 1px solid #e6dbd0;
+  word-break: break-word;
 }
 tr:last-child td {
   border-bottom: none;
@@ -238,6 +253,7 @@ li {
   padding: 4px 12px;
   border-radius: 30px;
   flex: 1 1 auto;
+  word-break: break-word;
 }
 .result-desc {
   width: 100%;
@@ -587,7 +603,15 @@ canvas {
   transform: translateX(-4px);
 }
 
-/* ===== АДАПТИВНОСТЬ ===== */
+/* ===== ГЛАВНАЯ СТРАНИЦА (сетка) ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+/* ========== АДАПТИВНОСТЬ (МОБИЛЬНЫЕ) ========== */
 @media (max-width: 768px) {
   body { padding: 10px; }
   .container { padding: 25px 16px; border-radius: 30px; }
@@ -595,22 +619,158 @@ canvas {
   h2 { font-size: 1.6rem; }
   input, select, textarea { font-size: 0.95rem; padding: 12px 14px; }
   .btn, button { width: 100%; padding: 14px; font-size: 1rem; }
-  .result-label { min-width: 120px; }
+  .result-label { min-width: 120px; flex-basis: 35%; }
+  .result-value { font-size: 0.9rem; }
   .square-grid { max-width: 240px; gap: 6px; }
   .cell { padding: 8px 4px; font-size: 1rem; }
   .gallery { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
   .card-item img { max-width: 70px; }
+  .table-wrap { overflow-x: auto; }
+  table { font-size: 0.8rem; min-width: 400px; }
+  th, td { padding: 8px 10px; }
+  .legend { font-size: 0.75rem; gap: 12px; }
+  .stats { font-size: 0.8rem; }
 }
 
 @media (max-width: 480px) {
+  body { padding: 6px; }
+  .container { padding: 16px 10px; border-radius: 24px; }
   h1 { font-size: 1.6rem; }
-  .container { padding: 16px 10px; }
-  .card { padding: 16px 12px; }
+  h2 { font-size: 1.3rem; }
+  .card { padding: 16px 12px; margin: 12px 0; }
   .result-item { flex-direction: column; align-items: stretch; }
-  .result-value { margin-top: 4px; }
-  table { font-size: 0.75rem; }
+  .result-label { min-width: auto; flex-basis: 100%; }
+  .result-value { margin-top: 4px; flex-basis: 100%; }
+  table { font-size: 0.7rem; min-width: 320px; }
   th, td { padding: 6px 8px; }
-  .legend { gap: 10px; font-size: 0.75rem; }
   .gallery { grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); }
   .card-item .card-name { font-size: 0.7rem; }
+  .legend { font-size: 0.7rem; gap: 8px; }
+  .stats { font-size: 0.7rem; gap: 4px; }
+  .stats span { padding: 2px 8px; }
+  .sub { font-size: 0.9rem; }
+  .back-link { font-size: 0.9rem; padding: 6px 14px; }
+}
+
+/* ========== ПЕЧАТЬ / PDF ========== */
+@media print {
+  body {
+    background: #ffffff;
+    padding: 0.2in;
+    display: block;
+  }
+  .container {
+    max-width: 100%;
+    background: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .card {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+    background: #fff;
+    box-shadow: none;
+    padding: 12px;
+    margin: 8px 0;
+  }
+  .back-link, .btn, button, .footer, .paid-note, .course, .footer a {
+    display: none !important;
+  }
+  .chart-container {
+    max-width: 100%;
+    padding: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  table {
+    font-size: 0.7rem;
+    min-width: auto;
+    width: 100%;
+    border: 1px solid #ccc;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 4px 6px;
+  }
+  .result-item {
+    border-bottom: 1px solid #eee;
+    padding: 4px 0;
+  }
+  .result-label {
+    min-width: 120px;
+  }
+  .result-value {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }
+  .result-desc {
+    font-size: 0.7rem;
+  }
+  .square-grid {
+    max-width: 200px;
+  }
+  .cell {
+    padding: 4px 2px;
+    font-size: 0.8rem;
+    border: 1px solid #aaa;
+  }
+  .badge {
+    background: #eee;
+    border: 1px solid #aaa;
+    padding: 2px 8px;
+    font-size: 0.6rem;
+  }
+  .warning {
+    border-left: 2px solid #c0392b;
+    padding: 6px;
+  }
+  .double-da-block {
+    border-left: 2px solid #8ab3c9;
+  }
+  .trait-list {
+    background: #f9f9f9;
+    padding: 6px 10px;
+  }
+  .interpretation, .col-desc {
+    font-size: 0.7rem;
+  }
+  .result-card {
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    padding: 10px;
+  }
+  .result-card .desc {
+    background: #f9f9f9;
+  }
+  .modal {
+    display: none !important;
+  }
+  /* Убираем фоновые изображения */
+  * {
+    background-image: none !important;
+  }
+  /* Чтобы графики не обрезались */
+  .chart-container {
+    page-break-inside: avoid;
+  }
+  /* Скрываем всё, что может мешать */
+  .print-only {
+    display: block !important;
+  }
+  /* Убираем лишние отступы */
+  .container {
+    padding: 0.1in !important;
+  }
 }
