@@ -923,3 +923,29 @@ body::before {
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(6px);
 }
+/* ===== ФОН ТОЛЬКО ДЛЯ ГЛАВНОЙ СТРАНИЦЫ ===== */
+body.home {
+  background-image: url('cosmoss.jpg'); /* если картинка называется иначе, поменяйте имя */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Затемнение, чтобы текст читался */
+body.home::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 27, 42, 0.5);
+  z-index: -1;
+}
+
+/* Контейнер на главной – светлый, с размытием */
+body.home .container {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(6px);
+}
