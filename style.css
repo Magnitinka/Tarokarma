@@ -1,4 +1,4 @@
-/* ===== БАЗОВЫЕ СТИЛИ (СВЕТЛАЯ ВЕРСИЯ) ===== */
+/* ===== БАЗОВЫЕ СТИЛИ (ЛАВАНДОВАЯ ТЕМА) ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,102 +7,102 @@
 
 :root {
   /* ===== ФОНЫ ===== */
-  --bg-body: #f3edf7;
-  --bg-body-gradient: radial-gradient(circle at 30% 20%, #faf5ff 0%, #ede4f5 100%);
-  --bg-container: rgba(255, 250, 255, 0.75);
-  --bg-card: rgba(255, 248, 255, 0.7);
-  --bg-card-hover: #ffffff;
-  --bg-input: rgba(255, 248, 255, 0.6);
-  --bg-cell: rgba(245, 235, 250, 0.6);
-  --bg-missing: rgba(200, 170, 210, 0.2);
-  --bg-trait: rgba(245, 235, 250, 0.4);
-  --bg-name-block: rgba(245, 235, 250, 0.4);
-  --bg-double-da: rgba(180, 80, 100, 0.08);
+  --bg-body: #dcc8e8;               /* насыщенный лавандовый */
+  --bg-body-gradient: radial-gradient(circle at 30% 20%, #e8d8f0 0%, #d0bcd8 100%);
+  --bg-container: rgba(255, 255, 255, 0.88);
+  --bg-card: #ffffff;
+  --bg-card-hover: #faf5ff;
+  --bg-input: #faf5ff;
+  --bg-cell: #f5edfa;
+  --bg-missing: #e8d8f0;
+  --bg-trait: #f5edfa;
+  --bg-name-block: #f5edfa;
+  --bg-double-da: rgba(180, 80, 100, 0.06);
   --bg-warning: rgba(200, 170, 210, 0.15);
   --bg-zero: rgba(200, 170, 210, 0.2);
-  --bg-karmic-row: rgba(180, 80, 100, 0.1);
-  --bg-unsolved: rgba(212, 175, 55, 0.08);
+  --bg-karmic-row: rgba(180, 80, 100, 0.08);
+  --bg-unsolved: rgba(212, 175, 55, 0.06);
   --bg-modal: #ffffff;
-  --bg-modal-desc: rgba(245, 235, 250, 0.4);
-  --bg-result-card: rgba(255, 248, 255, 0.7);
-  --bg-result-desc: rgba(245, 235, 250, 0.3);
-  --bg-legend: rgba(245, 235, 250, 0.4);
-  --bg-stats: rgba(245, 235, 250, 0.4);
-  --bg-footer-course: rgba(180, 80, 100, 0.1);
-  --bg-paid-note: rgba(180, 80, 100, 0.05);
+  --bg-modal-desc: #f5edfa;
+  --bg-result-card: #ffffff;
+  --bg-result-desc: #f5edfa;
+  --bg-legend: #f5edfa;
+  --bg-stats: #f5edfa;
+  --bg-footer-course: rgba(180, 80, 100, 0.08);
+  --bg-paid-note: rgba(180, 80, 100, 0.04);
   --bg-back-link: #b8a0c8;
   --bg-back-link-hover: #9a80aa;
 
   /* ===== ТЕКСТ ===== */
-  --text-primary: #3a2a4a;
-  --text-secondary: #5a4a6a;
-  --text-muted: #8a7a9a;
+  --text-primary: #2a1a3a;
+  --text-secondary: #4a3a5a;
+  --text-muted: #7a6a8a;
   --text-light: #ffffff;
-  --text-subtitle: #5a4a6a;
-  --text-desc: #6a5a7a;
-  --text-footer: #8a7a9a;
+  --text-subtitle: #4a3a5a;
+  --text-desc: #5a4a6a;
+  --text-footer: #7a6a8a;
   --text-footer-course: #7a4a6a;
   --text-link: #b8a0c8;
   --text-link-hover: #8a6a9a;
   --text-warning: #4a3a5a;
   --text-warning-strong: #a05050;
   --text-zero: #7a4a5a;
-  --text-cell: #3a2a4a;
-  --text-cell-missing: #8a7a9a;
-  --text-trait-title: #3a2a4a;
-  --text-badge: #3a2a4a;
+  --text-cell: #2a1a3a;
+  --text-cell-missing: #7a6a8a;
+  --text-trait-title: #2a1a3a;
+  --text-badge: #2a1a3a;
   --text-name-number: #b8a0c8;
-  --text-double-da: #3a2a4a;
-  --text-stats: #5a4a6a;
-  --text-legend: #5a4a6a;
-  --text-card-item: #3a2a4a;
-  --text-card-item-number: #8a7a9a;
-  --text-card-item-name: #3a2a4a;
-  --text-modal-title: #3a2a4a;
+  --text-double-da: #2a1a3a;
+  --text-stats: #4a3a5a;
+  --text-legend: #4a3a5a;
+  --text-card-item: #2a1a3a;
+  --text-card-item-number: #7a6a8a;
+  --text-card-item-name: #2a1a3a;
+  --text-modal-title: #2a1a3a;
 
   /* ===== АКЦЕНТЫ ===== */
-  --accent: #b8a0c8;               /* серебристо-фиолетовый */
+  --accent: #b8a0c8;               /* серебристо-лавандовый */
   --accent-light: #d0c0e0;
   --accent-dark: #9a80aa;
-  --accent-secondary: #8a4a5a;     /* благородное бордо */
+  --accent-secondary: #8a4a5a;     /* бордо */
 
   /* ===== ГРАНИЦЫ ===== */
-  --border-color: rgba(180, 80, 100, 0.15);
-  --border-light: rgba(180, 80, 100, 0.08);
-  --border-input: rgba(180, 80, 100, 0.15);
+  --border-color: rgba(180, 80, 100, 0.12);
+  --border-light: rgba(180, 80, 100, 0.06);
+  --border-input: rgba(180, 80, 100, 0.12);
   --border-input-focus: #b8a0c8;
-  --border-cell: rgba(180, 80, 100, 0.15);
-  --border-cell-missing: rgba(180, 80, 100, 0.1);
-  --border-badge: rgba(180, 80, 100, 0.1);
-  --border-name-block: rgba(180, 80, 100, 0.1);
-  --border-modal: rgba(180, 80, 100, 0.1);
-  --border-result-card: rgba(180, 80, 100, 0.1);
+  --border-cell: rgba(180, 80, 100, 0.12);
+  --border-cell-missing: rgba(180, 80, 100, 0.08);
+  --border-badge: rgba(180, 80, 100, 0.08);
+  --border-name-block: rgba(180, 80, 100, 0.08);
+  --border-modal: rgba(180, 80, 100, 0.08);
+  --border-result-card: rgba(180, 80, 100, 0.08);
 
   /* ===== КНОПКИ ===== */
-  --btn-bg: linear-gradient(135deg, #b8a0c8, #9a80aa);   /* серебристый фиолет */
+  --btn-bg: linear-gradient(135deg, #b8a0c8, #9a80aa);
   --btn-bg-hover: linear-gradient(135deg, #c8b0d8, #b8a0c8);
   --btn-text: #ffffff;
-  --btn-shadow: 0 4px 15px rgba(180, 160, 200, 0.3);
-  --btn-shadow-hover: 0 8px 25px rgba(180, 160, 200, 0.4);
+  --btn-shadow: 0 4px 15px rgba(180, 160, 200, 0.25);
+  --btn-shadow-hover: 0 8px 25px rgba(180, 160, 200, 0.35);
 
-  --btn-primary-bg: linear-gradient(135deg, #8a4a5a, #6a3a4a); /* бордо */
+  --btn-primary-bg: linear-gradient(135deg, #8a4a5a, #6a3a4a);
   --btn-primary-hover: linear-gradient(135deg, #a05a6a, #8a4a5a);
-  --btn-primary-shadow: 0 4px 15px rgba(138, 74, 90, 0.3);
-  --btn-primary-shadow-hover: 0 8px 25px rgba(138, 74, 90, 0.4);
+  --btn-primary-shadow: 0 4px 15px rgba(138, 74, 90, 0.25);
+  --btn-primary-shadow-hover: 0 8px 25px rgba(138, 74, 90, 0.35);
 
-  --btn-pdf-bg: linear-gradient(135deg, #b8a0c8, #9a80aa); /* серебро */
+  --btn-pdf-bg: linear-gradient(135deg, #b8a0c8, #9a80aa);
   --btn-pdf-hover: linear-gradient(135deg, #c8b0d8, #b8a0c8);
-  --btn-pdf-shadow: 0 4px 15px rgba(180, 160, 200, 0.3);
-  --btn-pdf-shadow-hover: 0 8px 25px rgba(180, 160, 200, 0.4);
+  --btn-pdf-shadow: 0 4px 15px rgba(180, 160, 200, 0.25);
+  --btn-pdf-shadow-hover: 0 8px 25px rgba(180, 160, 200, 0.35);
 
   /* ===== ТЕНИ ===== */
-  --shadow-card: 0 6px 18px rgba(120, 100, 140, 0.08);
-  --shadow-hover: 0 16px 40px rgba(180, 160, 200, 0.15);
+  --shadow-card: 0 6px 18px rgba(120, 100, 140, 0.10);
+  --shadow-hover: 0 16px 40px rgba(180, 160, 200, 0.18);
   --shadow-container: 0 30px 60px rgba(120, 100, 140, 0.08);
   --shadow-table: 0 4px 12px rgba(120, 100, 140, 0.06);
   --shadow-result: 0 4px 10px rgba(0,0,0,0.06);
   --shadow-chart: 0 4px 12px rgba(0,0,0,0.02);
-  --shadow-modal: 0 30px 60px rgba(0,0,0,0.1);
+  --shadow-modal: 0 30px 60px rgba(0,0,0,0.12);
 
   /* ===== ШРИФТЫ ===== */
   --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
@@ -282,7 +282,7 @@ button:active {
 table {
   width: 100%;
   border-collapse: collapse;
-  background: rgba(245, 235, 250, 0.3);
+  background: rgba(245, 237, 250, 0.4);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow-table);
@@ -290,7 +290,7 @@ table {
   min-width: 600px;
 }
 th {
-  background: rgba(180, 80, 100, 0.08);
+  background: rgba(180, 80, 100, 0.06);
   color: var(--text-primary);
   font-weight: 600;
   padding: 12px 15px;
@@ -329,7 +329,7 @@ li {
 
 /* ===== БЛОКИ РЕЗУЛЬТАТОВ ===== */
 .result-block {
-  background: rgba(245, 235, 250, 0.3);
+  background: rgba(245, 237, 250, 0.4);
   border-radius: 20px;
   padding: 18px 16px;
   margin: 12px 0;
@@ -351,7 +351,7 @@ li {
 .result-value {
   font-weight: 500;
   color: var(--text-secondary);
-  background: rgba(245, 235, 250, 0.3);
+  background: rgba(245, 237, 250, 0.4);
   padding: 4px 12px;
   border-radius: 30px;
   flex: 1 1 auto;
@@ -434,7 +434,7 @@ li {
 }
 .badge {
   display: inline-block;
-  background: rgba(245, 235, 250, 0.4);
+  background: rgba(245, 237, 250, 0.5);
   padding: 4px 12px;
   border-radius: 30px;
   font-size: 0.75rem;
@@ -544,7 +544,7 @@ canvas {
 .card-item:hover {
   transform: translateY(-5px);
   border-color: var(--accent);
-  box-shadow: 0 8px 20px rgba(120, 100, 140, 0.1);
+  box-shadow: 0 8px 20px rgba(120, 100, 140, 0.12);
 }
 .card-item img {
   width: 100%;
