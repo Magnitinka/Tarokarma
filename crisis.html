@@ -39,7 +39,7 @@
 </div>
 
 <script>
-// ===== ВЕСЬ ИСХОДНЫЙ JS-КОД ИЗ crisis.html =====
+// ===== ПОЛНЫЙ JS-КОД CRISIS (С РАСЧЁТАМИ) =====
 (function() {
     function pad2(n) { return String(n).padStart(2, '0'); }
 
@@ -296,9 +296,9 @@
         interpCard.className = 'card';
         interpCard.innerHTML = `<h3>🔮 Интерпретация</h3>`;
 
-        function buildInterp(data, label, cssClass) {
+        function buildInterp(data, label) {
             const hasZero = data.digits.includes(0);
-            let html = `<p><span class="${cssClass}">${label}</span> (средняя ${data.avg.toFixed(2)})</p>`;
+            let html = `<p><strong>${label}</strong> (средняя ${data.avg.toFixed(2)})</p>`;
             if (hasZero) {
                 html += `<div class="warning">⚠️ Присутствует <span class="zero-highlight">0</span> – угроза разрыва!</div>`;
             }
@@ -317,14 +317,21 @@
             return html;
         }
 
-        interpCard.innerHTML += buildInterp(manData, 'Мужчина', '');
+        interpCard.innerHTML += buildInterp(manData, 'Мужчина');
         interpCard.innerHTML += '<hr>';
-        interpCard.innerHTML += buildInterp(womanData, 'Женщина', '');
+        interpCard.innerHTML += buildInterp(womanData, 'Женщина');
         resultDiv.appendChild(interpCard);
     }
 
     document.getElementById('calcBtn').addEventListener('click', render);
-    document.getElementById('pdfBtn').addEventListener('click', () => window.print());
+    document.getElementById('pdfBtn').addEventListener('click', function() {
+        var res = document.getElementById('result');
+        if (res.innerHTML.trim() === '' || res.innerHTML.indexOf('⚠️') !== -1) {
+            alert('Сначала выполните расчёт (нажмите "ПОСТРОИТЬ ГРАФИК")');
+            return;
+        }
+        window.print();
+    });
     window.addEventListener('DOMContentLoaded', render);
 })();
 </script>
