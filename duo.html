@@ -39,8 +39,7 @@
 </div>
 
 <script>
-// ===== ВЕСЬ ИСХОДНЫЙ JS-КОД ИЗ duo.html (БЕЗ ИЗМЕНЕНИЙ) =====
-// Я копирую его из вашего сообщения.
+// ===== ПОЛНЫЙ JS-КОД DUO =====
 (function() {
     function toArcane(num) {
         if (num === 0) return 22;
@@ -441,7 +440,14 @@
     }
 
     document.getElementById('calcBtn').addEventListener('click', render);
-    document.getElementById('pdfBtn').addEventListener('click', () => window.print());
+    document.getElementById('pdfBtn').addEventListener('click', function() {
+        var res = document.getElementById('results');
+        if (res.innerHTML.trim() === '' || res.innerHTML.indexOf('⚠️') !== -1) {
+            alert('Сначала выполните расчёт (нажмите "РАССЧИТАТЬ")');
+            return;
+        }
+        window.print();
+    });
     window.addEventListener('DOMContentLoaded', render);
 })();
 </script>
